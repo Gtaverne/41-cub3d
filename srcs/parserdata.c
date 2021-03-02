@@ -14,7 +14,8 @@
 
 void	ft_resfill(t_all all, char *line)
 {
-	return ;
+	int		i;
+
 }
 
 char	*ft_pathfill(char *line, t_all all)
@@ -36,7 +37,8 @@ char	*ft_pathfill(char *line, t_all all)
 	res[j + 1] = 0;
 	if (open(res, O_RDONLY) < 0)
 	{
-		all.isok = all.isok + 1000;
+		all.isok += 1000;
+		printf("\nwrong path : %s\n", res);
 		return (NULL);
 	}
 	else
@@ -44,25 +46,25 @@ char	*ft_pathfill(char *line, t_all all)
 	return (res);
 }
 
-int		ft_ispath(t_all all, char *line)
+void		ft_ispath(t_all all, char *line)
 {
 	if (line[0] == 'N' && line[1] == 'O' && line[2] == ' ')
-		all.NO_path = ft_pathfill(line, all);
+		all.no_path = ft_pathfill(line + 3, all);
 	if (line[0] == 'S' && line[1] == 'O' && line[2] == ' ')
-		all.SO_path = ft_pathfill(line, all);
+		all.so_path = ft_pathfill(line + 3, all);
 	if (line[0] == 'W' && line[1] == 'E' && line[2] == ' ')
-		all.WE_path = ft_pathfill(line, all);
+		all.we_path = ft_pathfill(line + 3, all);
 	if (line[0] == 'E' && line[1] == 'A' && line[2] == ' ')
-		all.EA_path = ft_pathfill(line, all);
+		all.ea_path = ft_pathfill(line + 3, all);
 	if (line[0] == 'S' && line[1] == ' ')
-		all.S_path = ft_pathfill(line, all);
+		all.s_path = ft_pathfill(line + 2, all);
 }
 
 int		ft_parserdata(t_all all, int fd, char *line)
 {
 	int	i;
 
-	while (get_next_line(fd, &line) == 1 && all.isok != 255)
+	while (get_next_line(fd, &line) == 1 && all.isok < 352)
 	{
 		i = 0;
 		while (line[i] == ' ')
@@ -71,9 +73,9 @@ int		ft_parserdata(t_all all, int fd, char *line)
 			ft_resfill(all, line + i);
 		ft_ispath(all, line + i);
 		if (line[i] == 'F' && line[i + 1] == ' ')
-			all.floor_rgb = ft_rgb(line + i);
+			all.floor_rgb = ft_rgb(line + i, all);
 		if (line[i] == 'C' && line[i + 1] == ' ')
-			all.ceil_rgb = ft_rgb(line + i);
+			all.ceil_rgb = ft_rgb(line + i, all);
 	}
-	return (all.isok == 255);
+	return (all.isok == 352);
 }

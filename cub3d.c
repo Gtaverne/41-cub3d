@@ -16,7 +16,10 @@ int	main (int argc, char **argv)
 {
 	int		fd;
 	t_all	all;
+	char	*line;
 
+	line = NULL;
 	fd = open(argv[1], O_RDONLY);
-	
+	ft_parserdata(all, fd, line);
+	return (1);
 }
