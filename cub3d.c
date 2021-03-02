@@ -10,4 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "includes/cub3d.h"
 
+int	main (int argc, char **argv)
+{
+	int		fd;
+	t_all	all;
+
+	fd = open(argv[1], O_RDONLY);
+	
+}
