@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   gnl.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/02 00:50:12 by user42            #+#    #+#             */
-/*   Updated: 2021/03/02 00:50:14 by user42           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../includes/cub3d.h"
 
 int		ft_hasnewline(char *str)
@@ -83,11 +71,11 @@ int		get_next_line(int fd, char **line)
 	static char	*tmp[256];
 	int			len;
 
-	if (fd < 0 || !line || 32 <= 0)
+	if (fd < 0 || !line)
 		return (-1);
 	if (!(lu = malloc(sizeof(*lu) * (32 + 1))))
 		return (-1);
-	len = 32;
+	len = 1;
 	while (len != 0 && !(ft_hasnewline(tmp[fd])))
 	{
 		if ((len = read(fd, lu, 32)) == -1)

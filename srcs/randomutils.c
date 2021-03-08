@@ -1,20 +1,32 @@
 #include "../includes/cub3d.h"
 
-int	ft_atoi(char *str)
+int	ft_atoi(char *nptr)
 {
-	int	res;
-	int	i;
+	long long int		i;
+	long long int		r;
+	long long int		s;
 
 	i = 0;
-	res = 0;
-	while (str != 0 && str[i] < '0' && str[i] > '9')
+	r = 0;
+	s = 1;
+	while (nptr[i] == ' ' || (nptr[i] >= '\t' && nptr[i] <= '\r'))
 		i++;
-	while (str[i] >= '0' && str[i] <= '9')
+	if (nptr[i] == '-')
 	{
-		res = 10 * res + (str[i] - '0');
+		s = -1;
 		i++;
 	}
-	return (res);
+	else if (nptr[i] == '+')
+		i++;
+	while (nptr[i] != '\0')
+	{
+		if (nptr[i] >= '0' && nptr[i] <= '9')
+			r = r * 10 + nptr[i] - '0';
+		else
+			break ;
+		i++;
+	}
+	return (s * r);
 }
 
 void	ft_initall(t_all all)
@@ -22,4 +34,23 @@ void	ft_initall(t_all all)
 	all.isok = 0;
 	all.x_screen = 10;
 	all.y_screen = 10;
+}
+
+char	*ft_strdup(char *s)
+{
+	char	*res;
+	int		i;
+	int		len;
+
+	i = 0;
+	len = ft_strlen(s) + 1;
+	res = malloc(sizeof(char) * len);
+	if (!res)
+		return (NULL);
+	while (i < len)
+	{
+		res[i] = s[i];
+		i++;
+	}
+	return (res);
 }

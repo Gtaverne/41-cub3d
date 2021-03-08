@@ -18,12 +18,13 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <unistd.h>
 
 typedef struct	s_all
 {
 	/* D'abord, la map */
 	int				isok;
-	/* isok = XYZK is X > 0, error, Y = 3 if res ok,
+	/* isok = XYZK is X > 0, error, Y = 1 if res ok,
 	Z = 5 if all path are ok, K = 2 if rgb are ok*/
 	unsigned short	x_screen;
 	unsigned short	y_screen;
@@ -46,9 +47,10 @@ int		ft_hasnewline(char *str);
 char	*ft_majtmp(char *tmp);
 char	*ft_newline(char *tmp);
 
-int		ft_parserdata(t_all data, int fd, char *line);
+int		ft_parserdata(t_all all, int fd, char *line);
 void	ft_initall(t_all all);
-int		ft_atoicub(char *str);
-
+int		ft_atoi(char *str);
+char	**ft_split(char *str, char *charset);
+char	*ft_strdup(char *s);
 
 #endif
