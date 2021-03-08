@@ -12,7 +12,7 @@
 
 #include "../includes/cub3d.h"
 
-size_t	ft_strlen(char *s)
+int		ft_strlen(char *s)
 {
 	unsigned int i;
 

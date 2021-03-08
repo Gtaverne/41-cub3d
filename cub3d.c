@@ -14,10 +14,20 @@
 
 void	ft_printall(t_all all)
 {
+	int i;
+	
+	i = 0;
 	printf("\nPrint all_______________\n");
-	printf("Res x: %d y%d\n", all.x_screen, all.y_screen);
-	printf("Addresses:\n%s\n%s\n%s\n%s", all.no_path, all.so_path, all.we_path\
-	, all.ea_path);
+	printf("All is ok ? %d\n", all.isok);
+	printf("Res x: %d y: %d\n", all.x_screen, all.y_screen);
+	printf("RGB Ceil: %d RGBFloor: %d\n", all.ceil_rgb, all.floor_rgb);
+	printf("Addresses:\n%s\n%s\n%s\n%s\n%s\n", all.no_path, all.so_path, all.we_path\
+	, all.ea_path, all.s_path);
+	while (all.map[i])
+	{
+		printf("%s\n", all.map[i]);
+		i++;
+	}
 }
 
 int		main (int argc, char **argv)
@@ -26,11 +36,16 @@ int		main (int argc, char **argv)
 	t_all	all;
 	char	*line;
 
-	if (argc != 2)
+	if (argc < 2)
+	{
+		printf("too few arguments\n");
 		return(0);
+	}
 	line = NULL;
+	ft_initall(&all);
 	fd = open(argv[1], O_RDONLY);
-	ft_parserdata(all, fd, line);
+	ft_parserdata(&all, fd, line);
+	ft_parsermap(&all, fd, line);
 	ft_printall(all);
 	return (1);
 }

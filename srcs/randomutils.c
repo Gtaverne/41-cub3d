@@ -1,5 +1,14 @@
 #include "../includes/cub3d.h"
 
+void	ft_initall(t_all *all)
+{
+	all->isok = 0;
+	all->x_screen = 10;
+	all->y_screen = 10;
+	all->mapwdth = 0;
+	all->initpos[0] = 0;
+}
+
 int	ft_atoi(char *nptr)
 {
 	long long int		i;
@@ -29,13 +38,6 @@ int	ft_atoi(char *nptr)
 	return (s * r);
 }
 
-void	ft_initall(t_all all)
-{
-	all.isok = 0;
-	all.x_screen = 10;
-	all.y_screen = 10;
-}
-
 char	*ft_strdup(char *s)
 {
 	char	*res;
@@ -53,4 +55,17 @@ char	*ft_strdup(char *s)
 		i++;
 	}
 	return (res);
+}
+
+void	ft_freesplit(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+	i++;
+	}
+	free (str);
 }

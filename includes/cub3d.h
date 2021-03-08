@@ -36,21 +36,44 @@ typedef struct	s_all
 	int				floor_rgb;
 	int				ceil_rgb;
 	char			*map[2048];
+	int				mapwdth;
+	int				initpos[3];
 
 	/* Puis, le reste */
 }				t_all;
 
+/*cub3d*/
+void	ft_printall(t_all all);
+int		main (int argc, char **argv);
+
+/* gnl & gn_utils*/
 int		get_next_line(int fd, char **line);
-size_t	ft_strlen(char *str);
+int		ft_strlen(char *str);
 char	*ft_joinofgnl(char *s1, char *s2);
 int		ft_hasnewline(char *str);
 char	*ft_majtmp(char *tmp);
 char	*ft_newline(char *tmp);
 
-int		ft_parserdata(t_all all, int fd, char *line);
-void	ft_initall(t_all all);
-int		ft_atoi(char *str);
+/*parserdata*/
+int		ft_parserdata(t_all *all, int fd, char *line);
+void	ft_ispath(t_all *all, char **words);
+
+/*parsermap*/
+void	ft_firstmapline (t_all *all, int fd, char *line);
+int		ft_validmap(t_all *all);
+void	ft_spacepad(t_all *all);
+int		ft_parsermap(t_all *all, int fd, char *line);
+void	ft_mempos(t_all *all, int i, int j);
+int		ft_testpos(t_all *all, int i, int j);
+
+/*split*/
 char	**ft_split(char *str, char *charset);
+
+/*randomutils*/
+void	ft_initall(t_all *all);
+int		ft_atoi(char *str);
 char	*ft_strdup(char *s);
+void	ft_freesplit(char **str);
+
 
 #endif
