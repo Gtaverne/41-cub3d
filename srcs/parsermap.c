@@ -20,6 +20,7 @@ void	ft_firstmapline (t_all *all, int fd, char *line)
 		{
 			all->map[0] = ft_strdup(line);
 			all->mapwdth = ft_strlen(all->map[0]);
+			free(line);
 			return ;
 		}
 		free(line);
@@ -34,17 +35,22 @@ int		ft_validmap(t_all *all)
 	int		j;
 
 	i = 0;
+	printf("we test the map\n");
 	while (all->map[i] != 0)
 	{
 		j = 0;
 		while (all->map[i][j] != 0)
 		{
-			if (all->map[i][j] == 'N' || all->map[i][j] \
-			== 'E' || all->map[i][j] == 'S' || all->map[i][j] == 'W')
+			if (is_insep(all->map[i][j], "NSWE"))
+			{
+				printf("we get into mempos\n");
 				ft_mempos(all, i, j);
+			}
 			if (all->map[i][j] == '0')
+			{
 				if (ft_testpos(all, i, j) == 0)
 					return (0);
+			}
 			j++;
 		}
 		i++;
@@ -58,6 +64,7 @@ void	ft_spacepad(t_all *all)
 	int		i;
 
 	i = 0;
+	printf("we pad the map\n");
 	while (all->map[i])
 	{
 		while (ft_strlen(all->map[i]) < all->mapwdth)
@@ -74,15 +81,21 @@ int		ft_parsermap(t_all *all, int fd, char *line)
 	n = 1;
 	i = 0;
 	ft_firstmapline (all, fd, line);
-	while (get_next_line(fd, &all->map[n]) >= 0 && n < 15)
+	printf("we parse the map\n");
+	while (get_next_line(fd, &all->map[n]) >= 0 && n < 2046)
 	{
+		if (all->map[n][0] == 0 || all->map[n][0] == '\n')
+		{
+			free(all->map[n]);
+			break;
+		}
 		if (ft_strlen(all->map[n]) > all->mapwdth)
 			all->mapwdth = ft_strlen(all->map[n]);
-		printf("raw map %s\n", all->map[n]);
 		n++;
 	}
 	all->map[n] = 0;
 	ft_validmap(all);
 	ft_spacepad(all);
-	return (all->isok == 152);
+	printf("end the parser, all is ok %d\n", all->isok);
+	return (all->isok == 325);
 }

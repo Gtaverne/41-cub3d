@@ -28,6 +28,7 @@ void	ft_printall(t_all all)
 		printf("%s\n", all.map[i]);
 		i++;
 	}
+	printf ("initpos: %d %d %d\n", all.initpos[0], all.initpos[1], all.initpos[2]);
 }
 
 int		main (int argc, char **argv)
@@ -44,8 +45,16 @@ int		main (int argc, char **argv)
 	line = NULL;
 	ft_initall(&all);
 	fd = open(argv[1], O_RDONLY);
-	ft_parserdata(&all, fd, line);
-	ft_parsermap(&all, fd, line);
+	if (ft_parserdata(&all, fd, line) && ft_parsermap(&all, fd, line))
+		printf("Successful parsing\n");
+	else
+		{
+			printf("Wrong map file\n");
+			ft_cleanstruct(&all);
+			return (0);
+		}
 	ft_printall(all);
+	ft_view(&all);
+	ft_cleanstruct(&all);
 	return (1);
 }

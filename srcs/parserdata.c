@@ -32,8 +32,8 @@ int		ft_rgb(char **words, t_all *all)
 
 	i = ft_atoi(words[1]) * 65536 + ft_atoi(words[2]) * 256 \
 	+ ft_atoi(words[3]);
-	if (i >=0 && i <16777216)
-		all->isok += 1;
+	if (i >=0 && i <16777216 && words[4] == 0)
+		all->isok += 10;
 	else
 	{
 		printf("Wrong colour code\n");
@@ -45,40 +45,57 @@ int		ft_rgb(char **words, t_all *all)
 char	*ft_pathfill(char **words, t_all *all)
 {
 	char	*res;
+	int		fd;
 
 	res = ft_strdup(words[1]);
-	if (open(res, O_RDONLY) < 0)
+	fd = open(res, O_RDONLY);
+	if (fd < 0 || words[2] != 0)
 	{
 		all->isok = all->isok + 1000;
 		printf("\nwrong path : %s\n", res);
+		free(res);
+		close(fd);
 		return (NULL);
 	}
 	else
-		all->isok += 10;
+	{
+		all->isok += 1;
+		close(fd);
+	}
 	return (res);
 }
 
 void		ft_ispath(t_all *all, char **words)
 {
-	if (words[0][0] == 'N' && words[0][1] == 'O' && words[0][2] == 0)
+	if (words[0][0] == 'N' && words[0][1] == 'O' && words[0][2] == 0 &&\
+	 !all->no_path)
 		all->no_path = ft_pathfill(words, all);
-	if (words[0][0] == 'S' && words[0][1] == 'O' && words[0][2] == 0)
+	else if (words[0][0] == 'S' && words[0][1] == 'O' && words[0][2] == 0 \
+	&& !all->so_path)
 		all->so_path = ft_pathfill(words, all);
-	if (words[0][0] == 'W' && words[0][1] == 'E' && words[0][2] == 0)
+	else if (words[0][0] == 'W' && words[0][1] == 'E' && words[0][2] == 0 \
+	&& !all->we_path)
 		all->we_path = ft_pathfill(words, all);
-	if (words[0][0] == 'E' && words[0][1] == 'A' && words[0][2] == 0)
+	else if (words[0][0] == 'E' && words[0][1] == 'A' && words[0][2] == 0 \
+	&& !all->ea_path)
 		all->ea_path = ft_pathfill(words, all);
-	if (words[0][0] == 'S' && words[0][1] == 0)
+	else if (words[0][0] == 'S' && words[0][1] == 0 && !all->s_path)
 		all->s_path = ft_pathfill(words, all);
+	else
+	{
+		printf("Invalid path\n");
+		all->isok += 1000;
+	}
 }
 
 int		ft_parserdata(t_all *all, int fd, char *line)
 {
 	char	**words;
 
-	while (get_next_line(fd, &line) == 1 && all->isok < 152)
+	while (get_next_line(fd, &line) == 1 && all->isok < 125)
 	{
 		words = ft_split(line, " ,");
+		free (line);
 		if (!words[0])
 			printf("Empty line \n");
 		else if (words[0][0] == 'R' && words[0][1] == 0)
@@ -90,7 +107,10 @@ int		ft_parserdata(t_all *all, int fd, char *line)
 		else
 			ft_ispath(all, words);
 		ft_freesplit(words);
-		free (line);
 	}
-	return (all->isok == 152);
+	free(line);
+	printf("All isok ? %d\n", all->isok);
+	if (all->isok == 125)		
+		ft_finalcheck(all);
+	return (all->isok == 125);
 }

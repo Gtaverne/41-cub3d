@@ -3,10 +3,12 @@
 void	ft_initall(t_all *all)
 {
 	all->isok = 0;
-	all->x_screen = 10;
-	all->y_screen = 10;
-	all->mapwdth = 0;
+	all->x_screen = -1;
+	all->y_screen = -1;
+	all->mapwdth = -1;
 	all->initpos[0] = 0;
+	all->floor_rgb = -1;
+	all->ceil_rgb = -1;
 }
 
 int	ft_atoi(char *nptr)

@@ -19,6 +19,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <unistd.h>
+#include <mlx.h>
 
 typedef struct	s_all
 {
@@ -68,12 +69,19 @@ int		ft_testpos(t_all *all, int i, int j);
 
 /*split*/
 char	**ft_split(char *str, char *charset);
+int		is_insep(char c, char *sep);
 
 /*randomutils*/
 void	ft_initall(t_all *all);
 int		ft_atoi(char *str);
 char	*ft_strdup(char *s);
 void	ft_freesplit(char **str);
+void	ft_finalcheck(t_all *all);
 
+/*view*/
+int		ft_view(t_all *all);
+
+/*Clean exit*/
+void	ft_cleanstruct(t_all *all);
 
 #endif
