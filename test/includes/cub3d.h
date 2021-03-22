@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include "../mlx-linux/mlx.h"
+# include <math.h>
 
 typedef struct	s_all
 {
