@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parserdata.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/01 21:49:10 by user42            #+#    #+#             */
-/*   Updated: 2021/03/01 21:49:19 by user42           ###   ########.fr       */
+/*   Updated: 2021/03/18 18:58:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void	ft_resfill(t_all *all, char **words)
 		all->isok += 100;
 }
 
-int		ft_rgb(char **words, t_all *all)
+int	ft_rgb(char **words, t_all *all)
 {
 	int	i;
 
 	i = ft_atoi(words[1]) * 65536 + ft_atoi(words[2]) * 256 \
 	+ ft_atoi(words[3]);
-	if (i >=0 && i <16777216 && words[4] == 0)
+	if (i >= 0 && i < 16777216 && words[4] == 0)
 		all->isok += 10;
 	else
 	{
@@ -44,8 +44,8 @@ int		ft_rgb(char **words, t_all *all)
 
 char	*ft_pathfill(char **words, t_all *all)
 {
-	char	*res;
 	int		fd;
+	char	*res;
 
 	res = ft_strdup(words[1]);
 	fd = open(res, O_RDONLY);
@@ -65,10 +65,10 @@ char	*ft_pathfill(char **words, t_all *all)
 	return (res);
 }
 
-void		ft_ispath(t_all *all, char **words)
+void	ft_ispath(t_all *all, char **words)
 {
-	if (words[0][0] == 'N' && words[0][1] == 'O' && words[0][2] == 0 &&\
-	 !all->no_path)
+	if (words[0][0] == 'N' && words[0][1] == 'O' && words[0][2] == 0 && \
+	!all->no_path)
 		all->no_path = ft_pathfill(words, all);
 	else if (words[0][0] == 'S' && words[0][1] == 'O' && words[0][2] == 0 \
 	&& !all->so_path)
@@ -88,14 +88,14 @@ void		ft_ispath(t_all *all, char **words)
 	}
 }
 
-int		ft_parserdata(t_all *all, int fd, char *line)
+int	ft_parserdata(t_all *all, int fd, char *line)
 {
 	char	**words;
 
 	while (get_next_line(fd, &line) == 1 && all->isok < 125)
 	{
 		words = ft_split(line, " ,");
-		free (line);
+		free(line);
 		if (!words[0])
 			printf("Empty line \n");
 		else if (words[0][0] == 'R' && words[0][1] == 0)
@@ -110,7 +110,7 @@ int		ft_parserdata(t_all *all, int fd, char *line)
 	}
 	free(line);
 	printf("All isok ? %d\n", all->isok);
-	if (all->isok == 125)		
+	if (all->isok == 125)
 		ft_finalcheck(all);
 	return (all->isok == 125);
 }

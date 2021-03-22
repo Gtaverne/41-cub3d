@@ -79,7 +79,13 @@ void	ft_freesplit(char **str);
 void	ft_finalcheck(t_all *all);
 
 /*view*/
-int		ft_view(t_all *all);
+int 	ft_view(t_all *all);
+int		get_t(int trgb);
+int		get_r(int trgb);
+int		get_g(int trgb);
+int		get_b(int trgb);
+
+
 
 /*Clean exit*/
 void	ft_cleanstruct(t_all *all);

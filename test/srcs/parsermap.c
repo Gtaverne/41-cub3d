@@ -6,13 +6,13 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 23:20:54 by user42            #+#    #+#             */
-/*   Updated: 2021/03/08 23:21:13 by user42           ###   ########.fr       */
+/*   Updated: 2021/03/18 19:07:03 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	ft_firstmapline (t_all *all, int fd, char *line)
+void	ft_firstmapline(t_all *all, int fd, char *line)
 {
 	while (get_next_line(fd, &line) >= 0 && line)
 	{
@@ -35,17 +35,13 @@ int		ft_validmap(t_all *all)
 	int		j;
 
 	i = 0;
-	printf("we test the map\n");
 	while (all->map[i] != 0)
 	{
 		j = 0;
 		while (all->map[i][j] != 0)
 		{
 			if (is_insep(all->map[i][j], "NSWE"))
-			{
-				printf("we get into mempos\n");
 				ft_mempos(all, i, j);
-			}
 			if (all->map[i][j] == '0')
 			{
 				if (ft_testpos(all, i, j) == 0)
@@ -55,7 +51,7 @@ int		ft_validmap(t_all *all)
 		}
 		i++;
 	}
-	all->isok +=100;
+	all->isok += 100;
 	return (1);
 }
 
@@ -80,14 +76,13 @@ int		ft_parsermap(t_all *all, int fd, char *line)
 
 	n = 1;
 	i = 0;
-	ft_firstmapline (all, fd, line);
-	printf("we parse the map\n");
+	ft_firstmapline(all, fd, line);
 	while (get_next_line(fd, &all->map[n]) >= 0 && n < 2046)
 	{
 		if (all->map[n][0] == 0 || all->map[n][0] == '\n')
 		{
 			free(all->map[n]);
-			break;
+			break ;
 		}
 		if (ft_strlen(all->map[n]) > all->mapwdth)
 			all->mapwdth = ft_strlen(all->map[n]);
@@ -96,6 +91,5 @@ int		ft_parsermap(t_all *all, int fd, char *line)
 	all->map[n] = 0;
 	ft_validmap(all);
 	ft_spacepad(all);
-	printf("end the parser, all is ok %d\n", all->isok);
 	return (all->isok == 325);
 }
