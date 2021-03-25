@@ -28,7 +28,8 @@ void	ft_printall(t_all all)
 		printf("%s\n", all.map[i]);
 		i++;
 	}
-	printf ("initpos: %d %d %d\n", all.initpos[0], all.initpos[1], all.initpos[2]);
+	printf ("initpos: %f %f %f %f\n", all.xdir, all.ydir, all.xpos, all.ypos);
+	printf ("Width: %d  Height: %d \n", all.mapwdth, all.mapheight);
 }
 
 int		main (int argc, char **argv)

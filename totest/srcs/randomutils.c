@@ -6,9 +6,18 @@ void	ft_initall(t_all *all)
 	all->x_screen = -1;
 	all->y_screen = -1;
 	all->mapwdth = -1;
-	all->initpos[0] = 0;
+	all->mapheight = 0;
 	all->floor_rgb = -1;
 	all->ceil_rgb = -1;
+	all->no_path = 0;
+	all->ea_path = 0;
+	all->so_path = 0;
+	all->we_path = 0;
+	all->s_path = 0;
+	all->xpos = -1;
+	all->ypos = -1;
+	all->xdir = 0;
+	all->ydir = 0;
 }
 
 int	ft_atoi(char *nptr)

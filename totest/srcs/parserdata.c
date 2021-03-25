@@ -47,6 +47,7 @@ char	*ft_pathfill(char **words, t_all *all)
 	int		fd;
 	char	*res;
 
+	printf("\nwe fill a path\n");
 	res = ft_strdup(words[1]);
 	fd = open(res, O_RDONLY);
 	if (fd < 0 || words[2] != 0)
@@ -67,16 +68,16 @@ char	*ft_pathfill(char **words, t_all *all)
 
 void	ft_ispath(t_all *all, char **words)
 {
-	if (words[0][0] == 'N' && words[0][1] == 'O' && words[0][2] == 0 && \
-	!all->no_path)
+	if (words[0][0] == 'N' && words[0][1] == 'O' && words[0][2] == 0 
+	&& !all->no_path)
 		all->no_path = ft_pathfill(words, all);
-	else if (words[0][0] == 'S' && words[0][1] == 'O' && words[0][2] == 0 \
+	else if (words[0][0] == 'S' && words[0][1] == 'O' && words[0][2] == 0 
 	&& !all->so_path)
 		all->so_path = ft_pathfill(words, all);
-	else if (words[0][0] == 'W' && words[0][1] == 'E' && words[0][2] == 0 \
+	else if (words[0][0] == 'W' && words[0][1] == 'E' && words[0][2] == 0 
 	&& !all->we_path)
 		all->we_path = ft_pathfill(words, all);
-	else if (words[0][0] == 'E' && words[0][1] == 'A' && words[0][2] == 0 \
+	else if (words[0][0] == 'E' && words[0][1] == 'A' && words[0][2] == 0 
 	&& !all->ea_path)
 		all->ea_path = ft_pathfill(words, all);
 	else if (words[0][0] == 'S' && words[0][1] == 0 && !all->s_path)
@@ -105,7 +106,10 @@ int	ft_parserdata(t_all *all, int fd, char *line)
 		else if (words[0][0] == 'C' && words[0][1] == 0)
 			all->ceil_rgb = ft_rgb(words, all);
 		else
+		{
+			printf("word :%s\n", words[0]);
 			ft_ispath(all, words);
+		}
 		ft_freesplit(words);
 	}
 	free(line);

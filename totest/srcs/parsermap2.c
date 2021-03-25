@@ -14,21 +14,21 @@
 
 void	ft_mempos(t_all *all, int i, int j)
 {
-	if (all->initpos[0] != 0)
+	if (all->xpos != -1 && all->ypos != -1)
 	{
 		all->isok += 1000;
 		return;
 	}
 	if (all->map[i][j] == 'N')
-		all->initpos[0] = 1;
+		all->ydir = 1;
 	if (all->map[i][j] == 'E')
-		all->initpos[0] = 2;
+		all->xdir = 1;
 	if (all->map[i][j] == 'S')
-		all->initpos[0] = 3;
+		all->ydir = -1;
 	if (all->map[i][j] == 'W')
-		all->initpos[0] = 4;
-	all->initpos[1] = i;
-	all->initpos[2] = j;
+		all->xdir = -1;
+	all->xpos = (double)j + 0.5;
+	all->ypos = (double)i + 0.5;
 	all->map[i][j] = '0';
 	all->isok += 100;
 }

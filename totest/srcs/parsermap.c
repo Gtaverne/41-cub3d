@@ -20,6 +20,7 @@ void	ft_firstmapline(t_all *all, int fd, char *line)
 		{
 			all->map[0] = ft_strdup(line);
 			all->mapwdth = ft_strlen(all->map[0]);
+			all->mapheight += 1;
 			free(line);
 			return ;
 		}
@@ -87,6 +88,7 @@ int		ft_parsermap(t_all *all, int fd, char *line)
 		if (ft_strlen(all->map[n]) > all->mapwdth)
 			all->mapwdth = ft_strlen(all->map[n]);
 		n++;
+		all->mapheight += 1;
 	}
 	all->map[n] = 0;
 	ft_validmap(all);

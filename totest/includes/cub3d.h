@@ -22,6 +22,7 @@
 # include "../mlx-linux/mlx.h"
 # include <math.h>
 
+# define MINIMAP 5
 typedef struct	s_all
 {
 	/* D'abord, la map */
@@ -39,7 +40,11 @@ typedef struct	s_all
 	int				ceil_rgb;
 	char			*map[2048];
 	int				mapwdth;
-	int				initpos[3];
+	int				mapheight;
+	double			xpos;
+	double			ypos;
+	double			xdir;
+	double			ydir;
 
 	/* Puis, le reste */
 
@@ -86,6 +91,7 @@ int		ft_atoi(char *str);
 char	*ft_strdup(char *s);
 void	ft_freesplit(char **str);
 void	ft_finalcheck(t_all *all);
+double	f_abs(double d);
 
 /*view*/
 int 	ft_view(t_all *all);
