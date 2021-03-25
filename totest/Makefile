@@ -5,7 +5,7 @@ OS		= ${shell uname -s}
 SRCS	= cub3d.c srcs/gnl.c srcs/gnl_utils.c srcs/parserdata.c\
 			srcs/parsermap.c srcs/parsermap2.c srcs/randomutils.c \
 			srcs/randomutils2.c srcs/split.c srcs/cleanexit.c \
-			srcs/view.c srcs/view2.c
+			srcs/view.c srcs/view2.c srcs/hook.c
 
 OBJDIR	=	object
 OBJ 	=	$(addprefix $(OBJDIR)/, $(SRCS:.c=.o))

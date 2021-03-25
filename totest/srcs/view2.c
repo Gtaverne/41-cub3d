@@ -58,6 +58,7 @@ int		raycasting(t_all *all)
 
 	mlx_put_image_to_window(all->mlx, all->win, all->img, 0, 0);
 	/*
+	ft_movefromkey
 	la fonction à mettre dans une boucle
 	Faire la minimap
 	*/

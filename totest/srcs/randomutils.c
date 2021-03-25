@@ -18,6 +18,18 @@ void	ft_initall(t_all *all)
 	all->ypos = -1;
 	all->xdir = 0;
 	all->ydir = 0;
+	all->forward = 0;
+	all->backward = 0;
+	all->left = 0;
+	all->right = 0;
+	all->turn_left = 0;
+	all->turn_right = 0;
+	ft_initall2(all);
+}
+
+void	ft_initall2(t_all *all)
+{
+	(void)all;
 }
 
 int	ft_atoi(char *nptr)

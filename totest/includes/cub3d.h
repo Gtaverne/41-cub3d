@@ -23,6 +23,15 @@
 # include <math.h>
 
 # define MINIMAP 5
+
+/*qwerty MAC*/
+# define KEY_FORWARD 13
+# define KEY_BACKWARD 1
+# define KEY_LEFT 0
+# define KEY_RIGHT 13
+# define KEY_TURN_LEFT 123
+# define KEY_TURN_RIGHT 124
+
 typedef struct	s_all
 {
 	/* D'abord, la map */
@@ -55,6 +64,12 @@ typedef struct	s_all
     int         bits_per_pixel;
     int         line_length;
     int         endian;
+	int			forward;
+	int			backward;
+	int			left;
+	int			right;
+	int			turn_left;
+	int 		turn_right;
 }				t_all;
 
 /*cub3d*/
@@ -87,6 +102,7 @@ int		is_insep(char c, char *sep);
 
 /*randomutils*/
 void	ft_initall(t_all *all);
+void	ft_initall2(t_all *all);
 int		ft_atoi(char *str);
 char	*ft_strdup(char *s);
 void	ft_freesplit(char **str);
@@ -104,7 +120,9 @@ int		get_b(int trgb);
 int		ft_testview(t_all *all);
 void	my_mlx_pixel_put(t_all *all, int x, int y, int color);
 
-
+/*hook*/
+int     ft_key_hook(int n, t_all *all);
+int     ft_key_unhook(int n, t_all *all);
 
 
 /*Clean exit*/
