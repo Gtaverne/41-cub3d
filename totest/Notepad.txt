@@ -1,0 +1,18 @@
+int		ft_testview(t_all *all)
+{
+	void	*mlx;
+	void	*mlx_win;
+	int 	i;
+
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, all->x_screen, all->y_screen, "Hello world!");
+	//Raycasting, ma fonction appelée à chaque tour. 
+	//mlx_loop_hook(mlx, rayacasting, all);
+	img.img = mlx_new_image(mlx, all->x_screen, all->y_screen);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+								 &img.endian);
+		mlx_loop(mlx);
+	img = img + 0;
+	all->isok +=10000;
+	return(0);
+}

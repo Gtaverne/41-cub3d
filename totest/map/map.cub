@@ -1,4 +1,4 @@
-R 700 500
+R 1500 1100
 NO ./textures/1.xpm
 SO ./textures/2.xpm
 WE ./textures/3.xpm

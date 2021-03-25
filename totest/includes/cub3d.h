@@ -42,7 +42,10 @@ typedef struct	s_all
 	int				initpos[3];
 
 	/* Puis, le reste */
-    void        *img;
+
+    void		*mlx;
+	void        *img;
+	void		*win;
     char        *addr;
     int         bits_per_pixel;
     int         line_length;
@@ -90,7 +93,11 @@ int		get_t(int trgb);
 int		get_r(int trgb);
 int		get_g(int trgb);
 int		get_b(int trgb);
+
+/*view2*/
 int		ft_testview(t_all *all);
+void	my_mlx_pixel_put(t_all *all, int x, int y, int color);
+
 
 
 

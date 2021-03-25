@@ -71,11 +71,11 @@ void	ft_spacepad(t_all *all)
 
 int		ft_parsermap(t_all *all, int fd, char *line)
 {
-	int	i;
+//	int	i;
 	int	n;
 
 	n = 1;
-	i = 0;
+//	i = 0;
 	ft_firstmapline(all, fd, line);
 	while (get_next_line(fd, &all->map[n]) >= 0 && n < 2046)
 	{
