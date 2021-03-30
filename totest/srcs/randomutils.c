@@ -18,6 +18,8 @@ void	ft_initall(t_all *all)
 	all->ypos = -1;
 	all->xdir = 0;
 	all->ydir = 0;
+	all->xcam = 0;
+	all->ycam = 0;
 	all->forward = 0;
 	all->backward = 0;
 	all->left = 0;

@@ -26,6 +26,27 @@ void	put_mapsquare(t_all *all, int i, int j, int color)
 	}
 }
 
+void	put_player(t_all *all)
+{
+	int	i;
+
+	i = 0;
+	my_mlx_pixel_put(all, (int)(MINIMAP * (all->xpos + 1)), 
+	(int)(MINIMAP * (all->ypos + 1)), PLYR);
+	while (i < MINIMAP)
+	{
+		my_mlx_pixel_put(all, (int)(MINIMAP * (1 + all->xpos) + i * 
+		(cos(FOV) * all->xdir - sin(FOV) * all->ydir)), 
+		(int)(MINIMAP * (1 + all->ypos) + i * 
+		(sin(FOV) * all->xdir + cos(FOV) * all->ydir)), PLYR);
+		my_mlx_pixel_put(all, (int)(MINIMAP * (1 + all->xpos) + i * 
+		(cos(-FOV) * all->xdir - sin(-FOV) * all->ydir)), 
+		(int)(MINIMAP * (1 + all->ypos) + i * 
+		(sin(-FOV) * all->xdir + cos(-FOV) * all->ydir)), PLYR);
+		i++;
+	}
+}
+
 void	my_minimap(t_all *all)
 {
 	int	i;
@@ -42,14 +63,14 @@ void	my_minimap(t_all *all)
 			if (all->map[j][i] == '0')
 				put_mapsquare(all, i, j, 0);
 			else if (all->map[j][i] == '1')
-				put_mapsquare(all, i, j, 10000);
+				put_mapsquare(all, i, j, 60000);
 			else if (all->map[j][i] == '2')
 				put_mapsquare(all, i, j, 110000);
 			j++;
 		}
 		i++;
 	}
-	put_mapsquare(all, (int)all->xpos, (int)all->ypos, 16711680);
+
 }
 
 int		raycasting(t_all *all)
@@ -60,28 +81,10 @@ int		raycasting(t_all *all)
 	/*
 	ft_movefromkey
 	la fonction à mettre dans une boucle
-	Faire la minimap
 	*/
-	all->isok +=10000;
+	ft_mvt(all);
+	put_player(all);
 	return (0);
 }
 
-int		ft_testview(t_all *all)
-{
-	//int 	i;
-
-	all->mlx = mlx_init();
-	all->win = mlx_new_window(all->mlx, all->x_screen, all->y_screen, "Dudule forever");
-	//Raycasting, ma fonction appelée à chaque tour. 
-	mlx_loop_hook(all->mlx, raycasting, all);
-	mlx_hook(all->win, 2, 1L << 0, ft_key_hook, all);
-        mlx_hook(all->win, 3, 1L << 1, ft_key_unhook, all);
-	all->img = mlx_new_image(all->mlx, all->x_screen, all->y_screen);
-	all->addr = mlx_get_data_addr(all->img, &all->bits_per_pixel, &all->line_length,
-								 &all->endian);
-		mlx_loop(all->mlx);
-	all->img = all->img + 0;
-	all->isok +=10000;
-	return(0);
-}
 

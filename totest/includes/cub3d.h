@@ -22,15 +22,34 @@
 # include "../mlx-linux/mlx.h"
 # include <math.h>
 
-# define MINIMAP 5
+# define MINIMAP 10
+# define MVSPEED 5
+# define ANGLE 0.5
+# define FOV 0.5
+# define PACE 100
+# define PLYR 16711680
 
-/*qwerty MAC*/
-# define KEY_FORWARD 13
-# define KEY_BACKWARD 1
-# define KEY_LEFT 0
-# define KEY_RIGHT 13
-# define KEY_TURN_LEFT 123
-# define KEY_TURN_RIGHT 124
+
+
+/*azerty linux*/
+# ifdef __linux
+#  define KEY_FORWARD 122
+#  define KEY_BACKWARD 115
+#  define KEY_LEFT 113
+#  define KEY_RIGHT 100
+#  define KEY_TURN_LEFT 65361
+#  define KEY_TURN_RIGHT 65363
+# endif
+
+/*qwerty MAC, à vérifier*/
+# ifdef __MAC
+#  define KEY_FORWARD 13
+#  define KEY_BACKWARD 1
+#  define KEY_LEFT 0
+#  define KEY_RIGHT 13
+#  define KEY_TURN_LEFT 123
+#  define KEY_TURN_RIGHT 124
+# endif
 
 typedef struct	s_all
 {
@@ -54,6 +73,8 @@ typedef struct	s_all
 	double			ypos;
 	double			xdir;
 	double			ydir;
+	double			xcam;
+	double			ycam;
 
 	/* Puis, le reste */
 
@@ -118,11 +139,19 @@ int		get_b(int trgb);
 
 /*view2*/
 int		ft_testview(t_all *all);
+int		raycasting(t_all *all);
 void	my_mlx_pixel_put(t_all *all, int x, int y, int color);
 
 /*hook*/
 int     ft_key_hook(int n, t_all *all);
 int     ft_key_unhook(int n, t_all *all);
+
+/*mvmts*/
+void    ft_forward(t_all *all);
+void    ft_side(t_all *all);
+void    ft_back(t_all *all);
+void    ft_turn(t_all *all);
+void    ft_mvt(t_all *all);
 
 
 /*Clean exit*/

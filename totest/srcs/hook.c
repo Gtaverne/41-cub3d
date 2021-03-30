@@ -14,8 +14,6 @@ int     ft_key_hook(int n, t_all *all)
         all->turn_left = 1;
     if (n == KEY_TURN_RIGHT)
         all->turn_right = 1;
-   printf("n : %d\n", n);
-   (void)all;
    return (0);
 }
 
