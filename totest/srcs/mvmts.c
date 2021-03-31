@@ -42,12 +42,12 @@ void    ft_side(t_all *all)
         all->xpos += - i * all->ydir;
         all->ypos += i * all->xdir;
     }
-    else if (is_insep(all->map[(int)(all->ypos + i * all->xdir)]
+    else if (is_insep(all->map[(int)(all->ypos)]
     [(int)(all->xpos - i * all->ydir)], "0"))
-        all->xpos += i * all->xdir;
+        all->xpos += - i * all->ydir;
     else if (is_insep(all->map[(int)(all->ypos + i * all->xdir)]
-    [(int)(all->xpos - i * all->ydir)], "0"))
-        all->ypos += -i * all->ydir;
+    [(int)(all->xpos)], "0"))
+        all->ypos += i * all->xdir;
     else
         return ;
 }

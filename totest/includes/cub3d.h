@@ -23,8 +23,8 @@
 # include <math.h>
 
 # define MINIMAP 10
-# define MVSPEED 5
-# define ANGLE 0.5
+# define MVSPEED 4
+# define ANGLE 1
 # define FOV 0.5
 # define PACE 100
 # define PLYR 16711680
