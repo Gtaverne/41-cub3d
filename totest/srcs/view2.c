@@ -63,7 +63,7 @@ void	my_minimap(t_all *all)
 			if (all->map[j][i] == '0')
 				put_mapsquare(all, i, j, 0);
 			else if (all->map[j][i] == '1')
-				put_mapsquare(all, i, j, 60000);
+				put_mapsquare(all, i, j, 10000);
 			else if (all->map[j][i] == '2')
 				put_mapsquare(all, i, j, 110000);
 			j++;
@@ -75,15 +75,29 @@ void	my_minimap(t_all *all)
 
 int		raycasting(t_all *all)
 {
+	all->col = 0;
+	while (all->col < all->x_screen)
+	{
+		all->xc = 2 * all->col / (double)all->x_screen - 1;
+		all->xmap = (int)all->xpos;
+		all->ymap = (int)all->ypos;
+		all->rdirx = all->xdir + all->xcam * all->xc;
+		all->rdiry = all->ydir + all->ycam * all->xc;
+		if (all->rdirx == 0)
+			all->deltadistx = 10000000;
+		else
+			all->deltadistx = f_abs(1 / all->rdirx);
+		if (all->rdiry == 0)
+			all->deltadisty = 10000000;
+		else
+			all->deltadisty = f_abs(1 / all->rdiry);
+		ft_step(all);
+		all->col++;
+	}
 	my_minimap(all);
-
-	mlx_put_image_to_window(all->mlx, all->win, all->img, 0, 0);
-	/*
-	ft_movefromkey
-	la fonction à mettre dans une boucle
-	*/
 	ft_mvt(all);
 	put_player(all);
+	mlx_put_image_to_window(all->mlx, all->win, all->img, 0, 0);
 	return (0);
 }
 

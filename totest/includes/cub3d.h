@@ -26,8 +26,8 @@
 # define MVSPEED 4
 # define ANGLE 1
 # define FOV 0.5
-# define PACE 100
-# define PLYR 16711680
+# define PACE 10
+# define PLYR 16000000
 
 
 
@@ -41,12 +41,12 @@
 #  define KEY_TURN_RIGHT 65363
 # endif
 
-/*qwerty MAC, à vérifier*/
-# ifdef __MAC
+/*qwerty MAC*/
+# ifdef __APPLE__
 #  define KEY_FORWARD 13
 #  define KEY_BACKWARD 1
 #  define KEY_LEFT 0
-#  define KEY_RIGHT 13
+#  define KEY_RIGHT 2
 #  define KEY_TURN_LEFT 123
 #  define KEY_TURN_RIGHT 124
 # endif
@@ -91,6 +91,22 @@ typedef struct	s_all
 	int			right;
 	int			turn_left;
 	int 		turn_right;
+	double		rdirx;
+	double		rdiry;
+	double		xc;
+	int			xmap;
+	int			ymap;
+	double		sidedistx;
+	double		sidedisty;
+	double		deltadistx;
+	double		deltadisty;
+	double		walldist;
+	int			side;
+	int			stepx;
+	int			stepy;
+	int			hit;
+	int			vertl;
+	int			col;
 }				t_all;
 
 /*cub3d*/
@@ -141,6 +157,10 @@ int		get_b(int trgb);
 int		ft_testview(t_all *all);
 int		raycasting(t_all *all);
 void	my_mlx_pixel_put(t_all *all, int x, int y, int color);
+
+void	ft_step(t_all *all);
+void	ft_hit(t_all *all);
+void	ft_colplot(t_all *all);
 
 /*hook*/
 int     ft_key_hook(int n, t_all *all);

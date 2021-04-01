@@ -82,7 +82,9 @@ void    ft_turn(t_all *all)
     temp = all->xdir;
     all->xdir = cos(i * ANGLE) * all->xdir - sin(i * ANGLE) * all->ydir;
     all->ydir = sin(i * ANGLE) * temp + cos(i * ANGLE) * all->ydir;
-    printf("xdir: %f ydir: %f \n", all->xdir, all->ydir);
+   	all->ycam = 2 * tan(FOV) * all->xdir;
+	all->xcam = -2 * tan(FOV) * all->ydir;
+    printf("xdir: %f xcam: %f \n", all->xdir, all->xcam);
 }
 
 void    ft_mvt(t_all *all)
