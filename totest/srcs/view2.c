@@ -78,7 +78,7 @@ int		raycasting(t_all *all)
 	all->col = 0;
 	while (all->col < all->x_screen)
 	{
-		all->xc = 2 * all->col / (double)all->x_screen - 1;
+		all->xc = 1 - 2 * all->col / (double)all->x_screen;
 		all->xmap = (int)all->xpos;
 		all->ymap = (int)all->ypos;
 		all->rdirx = all->xdir + all->xcam * all->xc;

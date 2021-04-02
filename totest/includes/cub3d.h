@@ -26,7 +26,7 @@
 # define MVSPEED 4
 # define ANGLE 1
 # define FOV 0.5
-# define PACE 10
+# define PACE 100
 # define PLYR 16000000
 
 

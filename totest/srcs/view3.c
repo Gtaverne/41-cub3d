@@ -39,7 +39,7 @@ void	ft_hit(t_all *all)
         else
         {
         	all->sidedisty += all->deltadisty;
-        	all->xmap += all->stepx;
+        	all->ymap += all->stepy;
         	all->side = 1;
         }
         if(all->map[all->ymap][all->xmap] != '0')
@@ -47,12 +47,10 @@ void	ft_hit(t_all *all)
 	}
 	if (all->side == 0)
 		all->walldist = (all->xmap - all->xpos + (1 - all->stepx) / 2) 
-		/ all->xdir;
+		/ all->rdirx;
 	else
 		all->walldist = (all->ymap - all->ypos + (1 - all->stepy) / 2)
-		/ all->ydir;
-	printf("dist : %f\n", all->walldist);
-	all->vertl = (int)(all->y_screen / (all->walldist + 0.00001));
+		/ all->rdiry;
 	ft_colplot(all);
 }
 
@@ -61,14 +59,15 @@ void	ft_colplot(t_all *all)
 	int	i;
 	int	bord;
 
+	all->vertl = (int)(all->y_screen / (all->walldist + 0.00001));
 	i = 0;
 	bord = (all->y_screen - all->vertl);
 	if (bord < 0)
 		bord = 0;
 	while (i < bord / 2)
 	{
-		my_mlx_pixel_put(all, all->xc, i, 2000);
-		my_mlx_pixel_put(all, all->xc, all->y_screen - i, 0);		
+		my_mlx_pixel_put(all, all->col, i, 2000);
+		my_mlx_pixel_put(all, all->col, all->y_screen - i, 0);		
 		i++;
 	}
 	while (i < all->y_screen - bord / 2)

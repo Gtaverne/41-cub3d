@@ -27,8 +27,9 @@ void	ft_mempos(t_all *all, int i, int j)
 		all->ydir = -1;
 	if (all->map[i][j] == 'W')
 		all->xdir = -1;
-	all->ycam = 2 * tan(FOV) * all->xdir;
-	all->xcam = -2 * tan(FOV) * all->ydir;
+	all->ycam = -tan(FOV) * all->xdir;
+	all->xcam = tan(FOV) * all->ydir;
+	printf("init xcam : %f ycam : %f\n", all->xcam, all->ycam);
 	all->xpos = (double)j + 0.5;
 	all->ypos = (double)i + 0.5;
 	all->map[i][j] = '0';

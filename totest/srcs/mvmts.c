@@ -5,9 +5,6 @@ void    ft_forward(t_all *all)
     int     i;
 
     i = 0;
-    printf("On avance: xpos %i ypos %i\n", (int)all->xpos, (int)all->ypos);
-    printf("case de la map : %c\n", all->map[(int)(all->ypos)]
-        [(int)(all->xpos)]);
     while (i < MVSPEED)
     {
         if (is_insep(all->map[(int)(all->ypos + all->ydir / PACE)]
@@ -32,7 +29,6 @@ void    ft_side(t_all *all)
 {
     double i;
 
-    printf("On va sur un coté\n");
     i = (double)(all->right - all->left) / PACE;
     if (i == 0)
         return ;
@@ -54,7 +50,6 @@ void    ft_side(t_all *all)
 
 void    ft_back(t_all *all)
 {
-    printf("On recule\n");
     if (is_insep(all->map[(int)(all->ypos - all->ydir / PACE)]
     [(int)(all->xpos - all->xdir / PACE)], "0"))
     {
@@ -82,9 +77,8 @@ void    ft_turn(t_all *all)
     temp = all->xdir;
     all->xdir = cos(i * ANGLE) * all->xdir - sin(i * ANGLE) * all->ydir;
     all->ydir = sin(i * ANGLE) * temp + cos(i * ANGLE) * all->ydir;
-   	all->ycam = 2 * tan(FOV) * all->xdir;
-	all->xcam = -2 * tan(FOV) * all->ydir;
-    printf("xdir: %f xcam: %f \n", all->xdir, all->xcam);
+   	all->ycam = -tan(FOV) * all->xdir;
+	all->xcam = tan(FOV) * all->ydir;
 }
 
 void    ft_mvt(t_all *all)
