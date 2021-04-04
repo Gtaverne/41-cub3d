@@ -51,8 +51,21 @@
 #  define KEY_TURN_RIGHT 124
 # endif
 
+typedef struct	s_xtur {
+//	char	*path;
+	void	*img;
+	char	*add;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+
+	int		width;
+	int		height;
+}				t_xtur;
+
 typedef struct	s_all
 {
+	t_xtur			text[10];
 	/* D'abord, la map */
 	int				isok;
 	/* isok = XYZK is X > 0, error, Y = 1 if res ok,
@@ -60,9 +73,9 @@ typedef struct	s_all
 	unsigned short	x_screen;
 	unsigned short	y_screen;
 	char			*no_path;
+	char			*ea_path;
 	char			*so_path;
 	char			*we_path;
-	char			*ea_path;
 	char			*s_path;
 	int				floor_rgb;
 	int				ceil_rgb;

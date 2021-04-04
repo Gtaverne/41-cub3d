@@ -66,8 +66,8 @@ void	ft_colplot(t_all *all)
 		bord = 0;
 	while (i < bord / 2)
 	{
-		my_mlx_pixel_put(all, all->col, i, 2000);
-		my_mlx_pixel_put(all, all->col, all->y_screen - i, 0);		
+		my_mlx_pixel_put(all, all->col, i, all->floor_rgb);
+		my_mlx_pixel_put(all, all->col, all->y_screen - i, all->ceil_rgb);		
 		i++;
 	}
 	while (i < all->y_screen - bord / 2)
@@ -75,4 +75,6 @@ void	ft_colplot(t_all *all)
 		my_mlx_pixel_put(all, all->col, i, 60000 + all->side * 10000);
 		i++;
 	}
+	if (i < all->y_screen)
+		my_mlx_pixel_put(all, all->col, i, 60000 + all->side * 10000);
 }

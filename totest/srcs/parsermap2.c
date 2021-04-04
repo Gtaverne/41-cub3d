@@ -20,11 +20,11 @@ void	ft_mempos(t_all *all, int i, int j)
 		return;
 	}
 	if (all->map[i][j] == 'N')
-		all->ydir = 1;
+		all->ydir = -1;
 	if (all->map[i][j] == 'E')
 		all->xdir = 1;
 	if (all->map[i][j] == 'S')
-		all->ydir = -1;
+		all->ydir = 1;
 	if (all->map[i][j] == 'W')
 		all->xdir = -1;
 	all->ycam = -tan(FOV) * all->xdir;

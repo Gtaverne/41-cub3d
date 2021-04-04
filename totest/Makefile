@@ -10,7 +10,7 @@ SRCS	= cub3d.c srcs/gnl.c srcs/gnl_utils.c srcs/parserdata.c\
 
 OBJDIR	=	object
 OBJ 	=	$(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
-CFLAGS	=	-Wall -Wextra -Werror -g#-fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address
 MLX_DIR	=	mlx
 MLX_LNX	=	mlx-linux
 MLX		=	libmlx.dylib
