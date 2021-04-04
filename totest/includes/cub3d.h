@@ -114,11 +114,15 @@ typedef struct	s_all
 	double		deltadistx;
 	double		deltadisty;
 	double		walldist;
+	double		wallx;
+	int			xtex;
+	int			ytex;
 	int			side;
 	int			stepx;
 	int			stepy;
 	int			hit;
 	int			vertl;
+	double		verstep;
 	int			col;
 }				t_all;
 
