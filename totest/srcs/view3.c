@@ -54,42 +54,62 @@ void	ft_hit(t_all *all)
 	ft_colplot(all);
 }
 
+void	ft_texcal(t_all* all)
+{
+	if (all->side == 0 && all->rdirx < 0)
+		all->side += 2;
+	if (all->side == 1 && all->rdiry < 0 )
+		all->side += 2;
+}
+
 void	ft_colplot(t_all *all)
 {
-	int		i;
-	int		bord;
-
 	if (all->side == 0)
 		all->wallx = all->ypos + all->walldist * all->rdiry;
 	else
 		all->wallx = all->xpos + all->walldist * all->rdirx;
 	all->wallx -= floor((all->wallx));
+	ft_texcal(all);
 	all->xtex = (int)(all->wallx * (double)(all->text)[0].width);
 	if (all->side == 0 && all->rdirx > 0)
 		all->xtex = (double)(all->text)[all->side].width - all->xtex - 1;
 	if (all->side == 1 && all->rdiry > 0)
 		all->xtex = (double)(all->text)[all->side].width - all->xtex - 1;
-
 	all->vertl = (int)(all->y_screen / (all->walldist + 0.00001));
-	all->verstep = 1.0 * all->text[all->side].height / all->vertl;
+	all->topline = all->y_screen / 2 - all->vertl / 2;
+	if (all->topline < 0)
+		all->topline = 0;
+	all->botline = all->y_screen / 2 + all->vertl / 2;
+	if (all->botline >= all->y_screen)
+		all->botline = all->y_screen - 1;
+	ft_colplot2(all);
+}
+
+void	ft_colplot2(t_all *all)
+{
+	int		i;
+
 	i = 0;
-	bord = (all->y_screen - all->vertl);
-	if (bord < 0)
-		bord = 0;
-	while (i < bord / 2)
+	all->verstep = 1.0 * all->text[all->side].height / all->vertl;
+	all->texpos = (all->topline + all->vertl / 2 - all->y_screen / 2)
+	* all->verstep;
+	while (i < all->topline)
+	{
+		my_mlx_pixel_put(all, all->col, i, all->ceil_rgb);
+		i++;
+	}
+	while (i < all->botline)
+	{
+		all->ytex = (int)all->texpos & (all->text[all->side].height - 1);
+		all->texpos += all->verstep;
+		*(unsigned int *)(all->addr + (i * all->line_length + all->col * 4)) = 
+		*(unsigned int *)(all->text[all->side].add +  all->ytex * 
+		all->text[all->side].line_length + all->xtex * 4);
+		i++;
+	}
+	while (i < all->y_screen)
 	{
 		my_mlx_pixel_put(all, all->col, i, all->floor_rgb);
-		my_mlx_pixel_put(all, all->col, all->y_screen - i, all->ceil_rgb);		
 		i++;
 	}
-	while (i < all->y_screen - bord / 2)
-	{
-		all->ytex = (int)((i - bord / 2) * all->verstep);
-		*(unsigned int *)(all->addr + (i * all->line_length + all->col * 4)) = 
-		*(unsigned int *)(all->text[all->side].add +  all->ytex * all->text[all->side].line_length + all->xtex * 4);
-//		my_mlx_pixel_put(all, all->col, i, all->text[0].img[all->xtex][all->ytex]);
-		i++;
-	}
-	if (i < all->y_screen)
-		my_mlx_pixel_put(all, all->col, i, 60000 + all->side * 10000);
 }

@@ -4,13 +4,13 @@ void	ft_initext(t_all *all)
 {
 	int	i;
 
-	all->text[0].img = mlx_xpm_file_to_image(all->mlx, all->no_path,
+	all->text[0].img = mlx_xpm_file_to_image(all->mlx, all->ea_path,
 	&all->text[0].width, &all->text[0].height);
-	all->text[1].img = mlx_xpm_file_to_image(all->mlx, all->ea_path,
+	all->text[1].img = mlx_xpm_file_to_image(all->mlx, all->so_path,
 	&all->text[1].width, &all->text[1].height);
-	all->text[2].img = mlx_xpm_file_to_image(all->mlx, all->so_path,
+	all->text[2].img = mlx_xpm_file_to_image(all->mlx, all->we_path,
 	&all->text[2].width, &all->text[2].height);
-	all->text[3].img = mlx_xpm_file_to_image(all->mlx, all->we_path,
+	all->text[3].img = mlx_xpm_file_to_image(all->mlx, all->no_path,
 	&all->text[3].width, &all->text[3].height);
 	all->text[4].img = mlx_xpm_file_to_image(all->mlx, all->s_path,
 	&all->text[4].width, &all->text[4].height);

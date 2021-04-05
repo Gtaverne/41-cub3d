@@ -123,6 +123,9 @@ typedef struct	s_all
 	int			hit;
 	int			vertl;
 	double		verstep;
+	double		texpos;
+	int			botline;
+	int			topline;
 	int			col;
 }				t_all;
 
@@ -178,6 +181,7 @@ void	my_mlx_pixel_put(t_all *all, int x, int y, int color);
 void	ft_step(t_all *all);
 void	ft_hit(t_all *all);
 void	ft_colplot(t_all *all);
+void	ft_colplot2(t_all *all);
 
 /*hook*/
 int     ft_key_hook(int n, t_all *all);
