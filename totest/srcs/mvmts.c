@@ -7,17 +7,11 @@ void    ft_forward(t_all *all)
     i = 0;
     while (i < MVSPEED)
     {
-        if (is_insep(all->map[(int)(all->ypos + all->ydir / PACE)]
-        [(int)(all->xpos + all->xdir / PACE)], "0"))
-        {
-            all->xpos += all->xdir / PACE;
-            all->ypos += all->ydir / PACE;
-        }
-        else if (is_insep(all->map[(int)(all->ypos + all->ydir / PACE)]
+        if (is_insep(all->map[(int)(all->ypos + 2 * all->ydir / PACE)]
         [(int)(all->xpos)], "0"))
             all->ypos += all->ydir / PACE;
-        else if (is_insep(all->map[(int)(all->ypos)]
-        [(int)(all->xpos + all->xdir / PACE)], "0"))
+        if (is_insep(all->map[(int)(all->ypos)]
+        [(int)(all->xpos + 2 * all->xdir / PACE)], "0"))
             all->xpos += all->xdir / PACE;
         else
             break ;
@@ -32,16 +26,10 @@ void    ft_side(t_all *all)
     i = (double)(all->right - all->left) / PACE;
     if (i == 0)
         return ;
-    if (is_insep(all->map[(int)(all->ypos + i * all->xdir)]
-    [(int)(all->xpos - i * all->ydir)], "0"))
-    {
+    if (is_insep(all->map[(int)(all->ypos)]
+    [(int)(all->xpos - 2 * i * all->ydir)], "0"))
         all->xpos += - i * all->ydir;
-        all->ypos += i * all->xdir;
-    }
-    else if (is_insep(all->map[(int)(all->ypos)]
-    [(int)(all->xpos - i * all->ydir)], "0"))
-        all->xpos += - i * all->ydir;
-    else if (is_insep(all->map[(int)(all->ypos + i * all->xdir)]
+    if (is_insep(all->map[(int)(all->ypos + 2 * i * all->xdir)]
     [(int)(all->xpos)], "0"))
         all->ypos += i * all->xdir;
     else
@@ -50,17 +38,11 @@ void    ft_side(t_all *all)
 
 void    ft_back(t_all *all)
 {
-    if (is_insep(all->map[(int)(all->ypos - all->ydir / PACE)]
-    [(int)(all->xpos - all->xdir / PACE)], "0"))
-    {
-        all->xpos -= all->xdir / PACE;
-        all->ypos -= all->ydir / PACE;
-    }
-    else if (is_insep(all->map[(int)(all->ypos - all->ydir / PACE)]
+    if (is_insep(all->map[(int)(all->ypos - 2 * all->ydir / PACE)]
     [(int)(all->xpos)], "0"))
         all->ypos -= all->ydir / PACE;
-    else if (is_insep(all->map[(int)(all->ypos)]
-    [(int)(all->xpos - all->xdir / PACE)], "0"))
+    if (is_insep(all->map[(int)(all->ypos)]
+    [(int)(all->xpos - 2 * all->xdir / PACE)], "0"))
         all->xpos -= all->xdir / PACE;
     else
         return ;

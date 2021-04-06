@@ -55,3 +55,33 @@ int		ft_testpos(t_all *all, int i, int j)
 	}	
 	return (1);
 }
+
+void	ft_spritestock(t_all *all)
+{
+	int	i;
+	int	j;
+	int k;
+
+	i = 0;
+	k = 0;
+	while (i < all->mapheight)
+	{
+		j = 0;
+		while (j < all->mapwdth)
+		{
+			if (!all->map[i][j])
+				return;
+			if (all->map[i][j] == '2')
+			{
+				if (k == 500)
+					printf("Exit, too many sprites\n");
+				all->spritab[k][0] = i;
+				all->spritab[k][1] = j;
+				k++;
+			}
+			j++;
+		}
+		i++;
+	}
+	all->sprcount = k;
+}

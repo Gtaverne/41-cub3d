@@ -58,7 +58,6 @@ typedef struct	s_xtur {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-
 	int		width;
 	int		height;
 }				t_xtur;
@@ -66,10 +65,9 @@ typedef struct	s_xtur {
 typedef struct	s_all
 {
 	t_xtur			text[10];
-	/* D'abord, la map */
+	double			spritab[500][3];
+	double			bufferdist[10000];
 	int				isok;
-	/* isok = XYZK is X > 0, error, Y = 1 if res ok,
-	Z = 5 if all path are ok, K = 2 if rgb are ok*/
 	unsigned short	x_screen;
 	unsigned short	y_screen;
 	char			*no_path;
@@ -88,6 +86,18 @@ typedef struct	s_all
 	double			ydir;
 	double			xcam;
 	double			ycam;
+	double			xspr;
+	double			yspr;
+	double			sprxtrans;
+	double			sprytrans;
+	int				sprxscreen;
+	int				spryscreen;
+	int				sprheight;
+	int				sprwidth;
+	int				sprcount;
+	int				drawxstart;
+	int				drawxend;
+	double			invdet;
 
 	/* Puis, le reste */
 
@@ -152,6 +162,7 @@ void	ft_spacepad(t_all *all);
 int		ft_parsermap(t_all *all, int fd, char *line);
 void	ft_mempos(t_all *all, int i, int j);
 int		ft_testpos(t_all *all, int i, int j);
+void	ft_spritestock(t_all *all);
 
 /*split*/
 char	**ft_split(char *str, char *charset);
@@ -182,6 +193,9 @@ void	ft_step(t_all *all);
 void	ft_hit(t_all *all);
 void	ft_colplot(t_all *all);
 void	ft_colplot2(t_all *all);
+
+/*sprite*/
+void	ft_sprite(t_all *all);
 
 /*hook*/
 int     ft_key_hook(int n, t_all *all);

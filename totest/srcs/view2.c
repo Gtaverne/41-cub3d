@@ -77,7 +77,6 @@ int		raycasting(t_all *all)
 {
 	all->col = 0;
 	mlx_put_image_to_window(all->mlx, all->win, all->img, 0, 0);
-
 	while (all->col < all->x_screen)
 	{
 		all->xc = 1 - 2 * all->col / (double)all->x_screen;
@@ -94,11 +93,13 @@ int		raycasting(t_all *all)
 		else
 			all->deltadisty = f_abs(1 / all->rdiry);
 		ft_step(all);
+		all->bufferdist[all->col] = all->walldist;
 		all->col++;
 	}
 	my_minimap(all);
 	ft_mvt(all);
 	put_player(all);
+	ft_sprite(all);
 	return (0);
 }
 
