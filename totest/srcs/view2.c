@@ -19,7 +19,7 @@ void	put_mapsquare(t_all *all, int i, int j, int color)
 		l = 0;
 		while (l < MINIMAP)
 		{
-			my_mlx_pixel_put(all, MINIMAP * (i + 1) + k, MINIMAP * (j + 1) + l, color);
+			my_mlx_pixel_put(all, MINIMAP * (j + 1) + k, MINIMAP * (i + 1) + l, color);
 			l++;
 		}
 		k++;
@@ -55,16 +55,16 @@ void	my_minimap(t_all *all)
 	i = 0;
 	if (all->mapheight * (MINIMAP + 3) > all->y_screen || all->mapwdth * (MINIMAP + 3) > all->x_screen)
 		return ;
-	while (i < all->mapwdth)
+	while (i < all->mapheight)
 	{
 		j = 0;
-		while (j < all->mapheight)
+		while (j < all->mapwdth)
 		{
-			if (all->map[j][i] == '0')
+			if (all->map[i][j] == '0')
 				put_mapsquare(all, i, j, 0);
-			else if (all->map[j][i] == '1')
+			else if (all->map[i][j] == '1')
 				put_mapsquare(all, i, j, 10000);
-			else if (all->map[j][i] == '2')
+			else if (all->map[i][j] == '2')
 				put_mapsquare(all, i, j, 110000);
 			j++;
 		}
@@ -79,7 +79,7 @@ int		raycasting(t_all *all)
 	mlx_put_image_to_window(all->mlx, all->win, all->img, 0, 0);
 	while (all->col < all->x_screen)
 	{
-		all->xc = 1 - 2 * all->col / (double)all->x_screen;
+		all->xc = - 2 * all->col / (double)all->x_screen + 1;
 		all->xmap = (int)all->xpos;
 		all->ymap = (int)all->ypos;
 		all->rdirx = all->xdir + all->xcam * all->xc;

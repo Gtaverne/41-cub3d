@@ -42,7 +42,7 @@ void	ft_hit(t_all *all)
         	all->ymap += all->stepy;
         	all->side = 1;
         }
-        if(all->map[all->ymap][all->xmap] != '0')
+        if(all->map[all->ymap][all->xmap] == '1')
 			all->hit = 1;
 	}
 	if (all->side == 0)
@@ -70,10 +70,10 @@ void	ft_colplot(t_all *all)
 		all->wallx = all->xpos + all->walldist * all->rdirx;
 	all->wallx -= floor((all->wallx));
 	ft_texcal(all);
-	all->xtex = (int)(all->wallx * (double)(all->text)[0].width);
-	if (all->side == 0 && all->rdirx > 0)
+	all->xtex = (int)(all->wallx * (double)(all->text)[all->side].width);
+	if (all->side % 2 == 0 && all->rdirx > 0)
 		all->xtex = (double)(all->text)[all->side].width - all->xtex - 1;
-	if (all->side == 1 && all->rdiry > 0)
+	if (all->side % 2 == 1 && all->rdiry > 0)
 		all->xtex = (double)(all->text)[all->side].width - all->xtex - 1;
 	all->vertl = (int)(all->y_screen / (all->walldist + 0.00001));
 	all->topline = all->y_screen / 2 - all->vertl / 2;

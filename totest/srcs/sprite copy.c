@@ -31,26 +31,27 @@ void	ft_spritri(t_all *all)
 	}
 }
 
-void	ft_spritecol(t_all *all, int j)
+void	ft_spritecol(t_all *all, int k)
 {
 	int		d;
-	int		k;
+	int		j;
 
-	all->xtex = (int)((256 * (j - (all->sprxscreen - all->sprwidth / 2)) 
+	all->xtex = abs((256 * (k - (all->sprxscreen - all->sprwidth / 2)) 
 	* all->text[4].width / all->sprwidth)/ 256);
-	if (all->sprytrans > 0 && j > 0 && j < all->x_screen 
-	&& all->sprytrans < all->bufferdist[j])
+	if (all->sprytrans > 0 && k > 0 && k < all->x_screen 
+	&& all->sprytrans < all->bufferdist[k])
 	{
-		k = all->topline - 1;
-		while (++k < all->botline)
+		j = all->topline - 1;
+		while (++j < all->botline)
 		{
-			d = k * 256 + 128 * all->sprheight - 128 * all->y_screen;
-			all->ytex = (int)(((d * all->text[4].height) / all->sprheight) / 256);
+			d = 128 * (all->sprheight - all->y_screen);
+			all->ytex = abs(((d * all->text[4].height) / all->sprheight) / 256);
 
 				if (*(unsigned int *)(all->text[4].add + 
 				all->text[4].line_length * all->ytex + all->xtex * 4) != 1)
-					*(unsigned int *)(all->addr + (k * all->line_length + j * 4))
-					= *(unsigned int *)(all->text[4].add + all->text[4].line_length * all->ytex + all->xtex * 4);
+					*(unsigned int *)(all->addr + (j * all->line_length + k * 4))
+					= 16000000;
+					//*(unsigned int *)(all->text[2].add + all->text[2].line_length * all->ytex + all->xtex * 4);
 		}
 	}
 }
@@ -58,9 +59,9 @@ void	ft_spritecol(t_all *all, int j)
 
 void	ft_sprite2(t_all *all)
 {
-	int j;
+	int k;
 
-	all->topline = -all->sprheight / 2 + all->y_screen / 2 ;
+	all->topline = all->y_screen / 2 - all->sprheight / 2;
 	if (all->topline < 0)
 		all->topline = 0;
 	all->botline = all->y_screen/ 2 + all->sprheight / 2;
@@ -73,9 +74,9 @@ void	ft_sprite2(t_all *all)
 	all->drawxend = all->sprxscreen + all->sprwidth / 2;
 	if (all->drawxend > all->x_screen)
 		all->drawxend = all->x_screen - 1;
-	j = all->drawxstart - 1;
-	while (++j < all->drawxend)
-		ft_spritecol(all, j);
+	k = all->drawxstart - 1;
+	while (++k < all->drawxend)
+		ft_spritecol(all, k);
 }
 
 void	ft_sprite(t_all *all)
@@ -85,26 +86,24 @@ void	ft_sprite(t_all *all)
 	i = -1;
 	while (++i < all->sprcount)
 	{
-		all->spritab[i][2] = (all->spritab[i][1] - all->xpos) * (all->spritab[i][1] 
+		all->spritab[i][2] = (all->spritab[i][1] - all->xpos) * (all->{
+		spritab[i][1] 
 		- all->xpos) + (all->spritab[i][0] - all->ypos) * (all->spritab[i][0] - all->ypos);
 	}
 	ft_spritri(all);
-
 	i = -1;
 	while (++i < all->sprcount)
 	{
 		all->xspr = all->spritab[i][1] - all->xpos;
 		all->yspr = all->spritab[i][0] - all->ypos;
-		//vérifier les signes
-		printf("xcam : %f ycam %f xdir %f ydir %f\n", all->xcam, all->ycam, all->xdir, all->ydir);
-		all->invdet = 1.0 / (all->xcam * all->ydir - all->ycam * all->xdir);
-		all->sprxtrans = all->invdet *(all->ydir * all->xspr 
-		- all->xdir * all->yspr);
-		all->sprytrans = all->invdet * (-all->ycam * all->xspr 
+		all->invdet = 1.0 / (all->xcam * all->ydir + all->ycam * all->xdir);
+		all->sprxtrans = - all->invdet *(all->ydir * all->xspr 
+		+ all->xdir * all->yspr);
+		all->sprytrans = all->invdet * (all->ycam * all->xspr 
 		+ all->xcam * all->yspr);
 		all->sprxscreen = (int)((all->x_screen / 2) * (1 +
 		all->sprxtrans / all->sprytrans));
-		all->sprheight = abs((int)(all->y_screen / all->sprytrans));
+		all->sprheight = (int)f_abs(all->y_screen / all->sprytrans);
 		ft_sprite2(all);
 	}
 }
