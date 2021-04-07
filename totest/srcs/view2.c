@@ -33,7 +33,7 @@ void	put_player(t_all *all)
 	i = 0;
 	my_mlx_pixel_put(all, (int)(MINIMAP * (all->xpos + 1)), 
 	(int)(MINIMAP * (all->ypos + 1)), PLYR);
-	while (i < MINIMAP)
+	while (i < 3 * MINIMAP / 2 )
 	{
 		my_mlx_pixel_put(all, (int)(MINIMAP * (1 + all->xpos) + i * 
 		(cos(FOV) * all->xdir - sin(FOV) * all->ydir)), 
@@ -76,10 +76,11 @@ void	my_minimap(t_all *all)
 int		raycasting(t_all *all)
 {
 	all->col = 0;
-	mlx_put_image_to_window(all->mlx, all->win, all->img, 0, 0);
+	if (all->save == 0)
+		mlx_put_image_to_window(all->mlx, all->win, all->img, 0, 0);
 	while (all->col < all->x_screen)
 	{
-		all->xc = - 2 * all->col / (double)all->x_screen + 1;
+		all->xc = 2 * all->col / (double)all->x_screen - 1;
 		all->xmap = (int)all->xpos;
 		all->ymap = (int)all->ypos;
 		all->rdirx = all->xdir + all->xcam * all->xc;
@@ -96,11 +97,10 @@ int		raycasting(t_all *all)
 		all->bufferdist[all->col] = all->walldist;
 		all->col++;
 	}
-	my_minimap(all);
 	ft_mvt(all);
-	put_player(all);
 	ft_sprite(all);
+	my_minimap(all);
+	put_player(all);
+	//ft_printframe(all);
 	return (0);
 }
-
-

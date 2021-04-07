@@ -36,7 +36,7 @@ void	ft_spritecol(t_all *all, int j)
 	int		d;
 	int		k;
 
-	all->xtex = (int)((256 * (j - (all->sprxscreen - all->sprwidth / 2)) 
+	all->xtex = abs((256 * (j - (all->sprxscreen - all->sprwidth / 2)) 
 	* all->text[4].width / all->sprwidth)/ 256);
 	if (all->sprytrans > 0 && j > 0 && j < all->x_screen 
 	&& all->sprytrans < all->bufferdist[j])
@@ -45,7 +45,7 @@ void	ft_spritecol(t_all *all, int j)
 		while (++k < all->botline)
 		{
 			d = k * 256 + 128 * all->sprheight - 128 * all->y_screen;
-			all->ytex = (int)(((d * all->text[4].height) / all->sprheight) / 256);
+			all->ytex = abs(((d * all->text[4].height) / all->sprheight) / 256);
 
 				if (*(unsigned int *)(all->text[4].add + 
 				all->text[4].line_length * all->ytex + all->xtex * 4) != 1)
@@ -95,8 +95,6 @@ void	ft_sprite(t_all *all)
 	{
 		all->xspr = all->spritab[i][1] - all->xpos;
 		all->yspr = all->spritab[i][0] - all->ypos;
-		//vérifier les signes
-		printf("xcam : %f ycam %f xdir %f ydir %f\n", all->xcam, all->ycam, all->xdir, all->ydir);
 		all->invdet = 1.0 / (all->xcam * all->ydir - all->ycam * all->xdir);
 		all->sprxtrans = all->invdet *(all->ydir * all->xspr 
 		- all->xdir * all->yspr);

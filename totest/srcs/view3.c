@@ -71,7 +71,7 @@ void	ft_colplot(t_all *all)
 	all->wallx -= floor((all->wallx));
 	ft_texcal(all);
 	all->xtex = (int)(all->wallx * (double)(all->text)[all->side].width);
-	if (all->side % 2 == 0 && all->rdirx > 0)
+	if (all->side % 2 == 0 && all->rdirx < 0)
 		all->xtex = (double)(all->text)[all->side].width - all->xtex - 1;
 	if (all->side % 2 == 1 && all->rdiry > 0)
 		all->xtex = (double)(all->text)[all->side].width - all->xtex - 1;

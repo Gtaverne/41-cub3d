@@ -38,11 +38,8 @@ int		main (int argc, char **argv)
 	t_all	all;
 	char	*line;
 
-	if (argc < 2)
-	{
-		printf("too few arguments\n");
+	if (ft_save(&all, argc, argv) == 0)
 		return(0);
-	}
 	line = NULL;
 	ft_initall(&all);
 	fd = open(argv[1], O_RDONLY);

@@ -23,7 +23,7 @@ void    ft_side(t_all *all)
 {
     double i;
 
-    i = (double)(-all->right + all->left) / PACE;
+    i = (double)(all->right - all->left) / PACE;
     if (i == 0)
         return ;
     if (is_insep(all->map[(int)(all->ypos)]
@@ -53,14 +53,15 @@ void    ft_turn(t_all *all)
     double     i;
     double  temp;
 
-    i = (double)(-all->turn_right + all->turn_left) / PACE;
+    i = (double)(all->turn_right - all->turn_left) / PACE;
     if (i == 0)
         return ;
     temp = all->xdir;
-    all->xdir = cos(i * ANGLE) * all->xdir - sin(i * ANGLE) * all->ydir;
+    all->xdir = cos(i * ANGLE) * temp - sin(i * ANGLE) * all->ydir;
     all->ydir = sin(i * ANGLE) * temp + cos(i * ANGLE) * all->ydir;
-   	all->ycam = -tan(FOV) * all->xdir;
-	all->xcam = tan(FOV) * all->ydir;
+    temp = all->xcam;
+    all->xcam = cos(i * ANGLE) * temp - sin(i * ANGLE) * all->ycam;
+    all->ycam = sin(i * ANGLE) * temp + cos(i * ANGLE) * all->ycam;
 }
 
 void    ft_mvt(t_all *all)

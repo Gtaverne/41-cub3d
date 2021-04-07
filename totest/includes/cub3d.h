@@ -65,6 +65,7 @@ typedef struct	s_xtur {
 typedef struct	s_all
 {
 	t_xtur			text[10];
+	int				save;
 	double			spritab[500][3];
 	double			bufferdist[10000];
 	int				isok;
@@ -178,16 +179,16 @@ void	ft_finalcheck(t_all *all);
 double	f_abs(double d);
 
 /*view*/
-int 	ft_view(t_all *all);
-int		get_t(int trgb);
-int		get_r(int trgb);
-int		get_g(int trgb);
-int		get_b(int trgb);
+void	ft_initext(t_all *all);
 
 /*view2*/
 int		ft_testview(t_all *all);
 int		raycasting(t_all *all);
 void	my_mlx_pixel_put(t_all *all, int x, int y, int color);
+void	put_player(t_all *all);
+void	put_mapsquare(t_all *all, int i, int j, int color);
+void	my_minimap(t_all *all);
+
 
 void	ft_step(t_all *all);
 void	ft_hit(t_all *all);
@@ -208,6 +209,9 @@ void    ft_back(t_all *all);
 void    ft_turn(t_all *all);
 void    ft_mvt(t_all *all);
 
+/*Save*/
+int		ft_save(t_all *all, int argc, char **argv);
+void	ft_printframe(t_all *all);
 
 /*Clean exit*/
 void	ft_cleanstruct(t_all *all);

@@ -14,21 +14,31 @@
 
 void	ft_mempos(t_all *all, int i, int j)
 {
-	if (all->xpos != -1 && all->ypos != -1)
+	if (all->xpos != -1 || all->ypos != -1)
 	{
 		all->isok += 1000;
 		return;
 	}
 	if (all->map[i][j] == 'N')
+	{
 		all->ydir = -1;
+		all->xcam = tan(FOV);
+	}
 	if (all->map[i][j] == 'E')
+	{
 		all->xdir = 1;
+		all->ycam = tan(FOV);
+	}
 	if (all->map[i][j] == 'S')
+	{	
 		all->ydir = 1;
+		all->xcam = -tan(FOV);
+	}
 	if (all->map[i][j] == 'W')
+	{
 		all->xdir = -1;
-	all->ycam = -tan(FOV) * all->xdir;
-	all->xcam = tan(FOV) * all->ydir;
+		all->ycam = -tan(FOV);
+	}
 	printf("init xcam : %f ycam : %f\n", all->xcam, all->ycam);
 	all->xpos = (double)j + 0.5;
 	all->ypos = (double)i + 0.5;
@@ -75,8 +85,8 @@ void	ft_spritestock(t_all *all)
 			{
 				if (k == 500)
 					printf("Exit, too many sprites\n");
-				all->spritab[k][0] = i;
-				all->spritab[k][1] = j;
+				all->spritab[k][0] = i + 0.5;
+				all->spritab[k][1] = j + 0.5;
 				k++;
 			}
 			j++;
