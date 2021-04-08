@@ -101,6 +101,6 @@ int		raycasting(t_all *all)
 	ft_sprite(all);
 	my_minimap(all);
 	put_player(all);
-	//ft_printframe(all);
+	ft_printframe(all);
 	return (0);
 }

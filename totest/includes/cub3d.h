@@ -29,7 +29,9 @@
 # define PACE 100
 # define PLYR 16000000
 
-
+# ifndef BONUS
+#  define BONUS 0
+# endif
 
 /*azerty linux*/
 # ifdef __linux
@@ -39,6 +41,7 @@
 #  define KEY_RIGHT 100
 #  define KEY_TURN_LEFT 65361
 #  define KEY_TURN_RIGHT 65363
+#  define KEY_ESCAPE 65307
 # endif
 
 /*qwerty MAC*/
@@ -49,6 +52,7 @@
 #  define KEY_RIGHT 2
 #  define KEY_TURN_LEFT 123
 #  define KEY_TURN_RIGHT 124
+#  define KEY_ESCAPE 65307
 # endif
 
 typedef struct	s_xtur {
@@ -115,6 +119,7 @@ typedef struct	s_all
 	int			right;
 	int			turn_left;
 	int 		turn_right;
+	int			escape;
 	double		rdirx;
 	double		rdiry;
 	double		xc;
@@ -214,6 +219,6 @@ int		ft_save(t_all *all, int argc, char **argv);
 void	ft_printframe(t_all *all);
 
 /*Clean exit*/
-void	ft_cleanstruct(t_all *all);
+int		ft_cleanstruct(t_all *all);
 
 #endif

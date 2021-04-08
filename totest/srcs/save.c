@@ -40,7 +40,7 @@ void	bmp_top_info(t_all *all, int fd)
 		write(fd, &buff, 4);
 }
 
-void	screenshot(t_all *all)
+void	ft_screenshot(t_all *all)
 {
 	int fd;
 	int	x;
@@ -65,12 +65,13 @@ void	ft_printframe(t_all *all)
 {
 	if (all->save == 1)
 	{
-		if ((MINIMAP + 2) * all->mapwdth <= all->x_screen &&
+		if (BONUS == 1 && (MINIMAP + 2) * all->mapwdth <= all->x_screen &&
 		(MINIMAP + 2) * all->ymap <= all->y_screen)
 		{
 			my_minimap(all);
 			put_player(all);
 		}
+		ft_screenshot(all);
 	}
 }
 
@@ -85,7 +86,7 @@ int		ft_save(t_all *all, int argc, char **argv)
 	}
 	if (argc == 2)
 		return (1);
-	else if (ft_strncmp(argv[3], "--save", 10) == 0)
+	else if (ft_strncmp(argv[2], "--save", 10) == 0)
 	{
 		all->save = 1;
 		return (1);

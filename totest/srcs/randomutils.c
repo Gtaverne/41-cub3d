@@ -31,7 +31,8 @@ void	ft_initall(t_all *all)
 
 void	ft_initall2(t_all *all)
 {
-	(void)all;
+	all->escape = 0;
+	all->map[0] = NULL;
 }
 
 int	ft_atoi(char *nptr)
