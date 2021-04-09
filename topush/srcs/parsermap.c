@@ -20,6 +20,7 @@ void	ft_firstmapline(t_all *all, int fd, char *line)
 		{
 			all->map[0] = ft_strdup(line);
 			all->mapwdth = ft_strlen(all->map[0]);
+			all->mapheight += 1;
 			free(line);
 			return ;
 		}
@@ -71,25 +72,26 @@ void	ft_spacepad(t_all *all)
 
 int		ft_parsermap(t_all *all, int fd, char *line)
 {
-	int	i;
 	int	n;
 
 	n = 1;
-	i = 0;
 	ft_firstmapline(all, fd, line);
 	while (get_next_line(fd, &all->map[n]) >= 0 && n < 2046)
 	{
 		if (all->map[n][0] == 0 || all->map[n][0] == '\n')
 		{
 			free(all->map[n]);
+			ft_cleangnl(fd, line);
 			break ;
 		}
 		if (ft_strlen(all->map[n]) > all->mapwdth)
 			all->mapwdth = ft_strlen(all->map[n]);
 		n++;
+		all->mapheight += 1;
 	}
 	all->map[n] = 0;
 	ft_validmap(all);
 	ft_spacepad(all);
+	ft_spritestock(all);
 	return (all->isok == 325);
 }

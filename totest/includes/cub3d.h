@@ -34,9 +34,9 @@
 # endif
 
 # ifdef __linux
-#  define KEY_FORWARD 122
+#  define KEY_FORWARD 119
 #  define KEY_BACKWARD 115
-#  define KEY_LEFT 113
+#  define KEY_LEFT 97
 #  define KEY_RIGHT 100
 #  define KEY_TURN_LEFT 65361
 #  define KEY_TURN_RIGHT 65363

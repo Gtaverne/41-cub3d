@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   randomutils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/09 14:41:35 by user42            #+#    #+#             */
+/*   Updated: 2021/04/09 14:41:37 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	ft_initall(t_all *all)
@@ -6,12 +18,37 @@ void	ft_initall(t_all *all)
 	all->x_screen = -1;
 	all->y_screen = -1;
 	all->mapwdth = -1;
-	all->initpos[0] = 0;
+	all->mapheight = 0;
 	all->floor_rgb = -1;
 	all->ceil_rgb = -1;
+	all->no_path = 0;
+	all->ea_path = 0;
+	all->so_path = 0;
+	all->we_path = 0;
+	all->s_path = 0;
+	all->xpos = -1;
+	all->ypos = -1;
+	all->xdir = 0;
+	all->ydir = 0;
+	all->xcam = 0;
+	all->ycam = 0;
+	all->forward = 0;
+	all->backward = 0;
+	all->left = 0;
+	all->right = 0;
+	all->turn_left = 0;
+	all->turn_right = 0;
+	ft_initall2(all);
 }
 
-int	ft_atoi(char *nptr)
+void	ft_initall2(t_all *all)
+{
+	all->escape = 0;
+	all->save = 0;
+	all->map[0] = NULL;
+}
+
+int		ft_atoi(char *nptr)
 {
 	long long int		i;
 	long long int		r;
@@ -67,7 +104,7 @@ void	ft_freesplit(char **str)
 	while (str[i])
 	{
 		free(str[i]);
-	i++;
+		i++;
 	}
-	free (str);
+	free(str);
 }
