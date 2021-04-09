@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   view3.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/09 14:46:08 by user42            #+#    #+#             */
+/*   Updated: 2021/04/09 14:46:10 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	ft_step(t_all *all)
@@ -30,23 +42,23 @@ void	ft_hit(t_all *all)
 {
 	while (all->hit == 0)
 	{
-		if(all->sidedistx < all->sidedisty)
+		if (all->sidedistx < all->sidedisty)
 		{
 			all->sidedistx += all->deltadistx;
-        	all->xmap += all->stepx;
-        	all->side = 0;
-        }
-        else
-        {
-        	all->sidedisty += all->deltadisty;
-        	all->ymap += all->stepy;
-        	all->side = 1;
-        }
-        if(all->map[all->ymap][all->xmap] == '1')
+			all->xmap += all->stepx;
+			all->side = 0;
+		}
+		else
+		{
+			all->sidedisty += all->deltadisty;
+			all->ymap += all->stepy;
+			all->side = 1;
+		}
+		if (all->map[all->ymap][all->xmap] == '1')
 			all->hit = 1;
 	}
 	if (all->side == 0)
-		all->walldist = (all->xmap - all->xpos + (1 - all->stepx) / 2) 
+		all->walldist = (all->xmap - all->xpos + (1 - all->stepx) / 2)
 		/ all->rdirx;
 	else
 		all->walldist = (all->ymap - all->ypos + (1 - all->stepy) / 2)
@@ -54,11 +66,11 @@ void	ft_hit(t_all *all)
 	ft_colplot(all);
 }
 
-void	ft_texcal(t_all* all)
+void	ft_texcal(t_all *all)
 {
 	if (all->side == 0 && all->rdirx < 0)
 		all->side += 2;
-	if (all->side == 1 && all->rdiry < 0 )
+	if (all->side == 1 && all->rdiry < 0)
 		all->side += 2;
 }
 
@@ -102,8 +114,8 @@ void	ft_colplot2(t_all *all)
 	{
 		all->ytex = (int)all->texpos & (all->text[all->side].height - 1);
 		all->texpos += all->verstep;
-		*(unsigned int *)(all->addr + (i * all->line_length + all->col * 4)) = 
-		*(unsigned int *)(all->text[all->side].add +  all->ytex * 
+		*(unsigned int *)(all->addr + (i * all->line_length + all->col * 4)) =
+		*(unsigned int *)(all->text[all->side].add + all->ytex *
 		all->text[all->side].line_length + all->xtex * 4);
 		i++;
 	}

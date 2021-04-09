@@ -39,16 +39,16 @@ int		main(int argc, char **argv)
 	t_all	all;
 	char	*line;
 
+	ft_initall(&all);
 	if (ft_save(&all, argc, argv) == 0)
 		return (0);
 	line = NULL;
-	ft_initall(&all);
 	fd = open(argv[1], O_RDONLY);
 	if (ft_parserdata(&all, fd, line) && ft_parsermap(&all, fd, line))
 		printf("Successful parsing\n");
 	else
 	{
-		printf("Wrong map file\n");
+		printf("Error\nWrong .cub file\n");
 		ft_cleanstruct(&all);
 		return (0);
 	}

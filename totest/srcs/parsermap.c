@@ -81,6 +81,7 @@ int		ft_parsermap(t_all *all, int fd, char *line)
 		if (all->map[n][0] == 0 || all->map[n][0] == '\n')
 		{
 			free(all->map[n]);
+			ft_cleangnl(fd, line);
 			break ;
 		}
 		if (ft_strlen(all->map[n]) > all->mapwdth)

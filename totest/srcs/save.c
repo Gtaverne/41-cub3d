@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   save.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/09 14:41:55 by user42            #+#    #+#             */
+/*   Updated: 2021/04/09 14:41:57 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 int		ft_strncmp(const char *s1, const char *s2, int n)
@@ -46,7 +58,7 @@ void	ft_screenshot(t_all *all)
 	int	x;
 	int	y;
 
-	fd = open("screenshot.bmp", O_CREAT | O_RDWR);
+	fd = open("screenshot.bmp", O_CREAT | O_RDWR, 0777);
 	bmp_top_info(all, fd);
 	y = all->y_screen - 1;
 	while (y >= 0)
@@ -80,8 +92,8 @@ int		ft_save(t_all *all, int argc, char **argv)
 	all->save = 0;
 	if (argc < 2 || argc > 3)
 	{
-		printf("Mauvais arguments, donnez le path d'une map et en option\
-		'--save' \n");
+		printf("Error\nMauvais arguments, donnez le path d'une map\
+		et en option '--save' \n");
 		return (0);
 	}
 	if (argc == 2)

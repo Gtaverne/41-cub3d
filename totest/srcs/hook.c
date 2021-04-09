@@ -27,7 +27,10 @@ int	ft_key_hook(int n, t_all *all)
 	if (n == KEY_TURN_RIGHT)
 		all->turn_right = 1;
 	if (n == KEY_ESCAPE)
+	{
+		all->escape = 1;
 		ft_cleanstruct(all);
+	}
 	return (0);
 }
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   randomutils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/09 14:41:35 by user42            #+#    #+#             */
+/*   Updated: 2021/04/09 14:41:37 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	ft_initall(t_all *all)
@@ -32,10 +44,11 @@ void	ft_initall(t_all *all)
 void	ft_initall2(t_all *all)
 {
 	all->escape = 0;
+	all->save = 0;
 	all->map[0] = NULL;
 }
 
-int	ft_atoi(char *nptr)
+int		ft_atoi(char *nptr)
 {
 	long long int		i;
 	long long int		r;
@@ -91,7 +104,7 @@ void	ft_freesplit(char **str)
 	while (str[i])
 	{
 		free(str[i]);
-	i++;
+		i++;
 	}
-	free (str);
+	free(str);
 }

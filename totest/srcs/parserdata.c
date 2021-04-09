@@ -36,7 +36,7 @@ int		ft_rgb(char **words, t_all *all)
 		all->isok += 10;
 	else
 	{
-		printf("Wrong colour code\n");
+		printf("Error\nWrong colour code\n");
 		all->isok += 1000;
 	}
 	return (i);
@@ -53,7 +53,7 @@ char	*ft_pathfill(char **words, t_all *all)
 	if (fd < 0 || words[2] != 0)
 	{
 		all->isok = all->isok + 1000;
-		printf("\nwrong path : %s\n", res);
+		printf("Error\nWrong path : %s\n", res);
 		free(res);
 		close(fd);
 		return (NULL);
@@ -95,7 +95,7 @@ int		ft_parserdata(t_all *all, int fd, char *line)
 		words = ft_split(line, " ,");
 		free(line);
 		if (!words[0])
-			printf("Empty line in .cub\n");
+			printf("Empty line in .cub, so far so good\n");
 		else if (words[0][0] == 'R' && words[0][1] == 0)
 			ft_resfill(all, words);
 		else if (words[0][0] == 'F' && words[0][1] == 0)
@@ -111,7 +111,6 @@ int		ft_parserdata(t_all *all, int fd, char *line)
 	free(line);
 	if (all->isok == 125)
 		return (1);
-	else
-		ft_cleanstruct(all);
+	ft_cleangnl(fd, line);
 	return (0);
 }

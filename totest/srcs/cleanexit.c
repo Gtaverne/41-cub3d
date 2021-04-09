@@ -26,6 +26,13 @@ void	ft_cleanmlx(t_all *all)
 	free(all->mlx);
 }
 
+void	ft_cleangnl(int fd, char *line)
+{
+	while (get_next_line(fd, &line) > 0)
+		free(line);
+	free(line);
+}
+
 int		ft_cleanstruct(t_all *all)
 {
 	int	i;

@@ -22,7 +22,7 @@
 # include "../mlx-linux/mlx.h"
 # include <math.h>
 
-# define MINIMAP 10
+# define MINIMAP 6
 # define MVSPEED 4
 # define ANGLE 1
 # define FOV 0.5
@@ -33,7 +33,6 @@
 #  define BONUS 0
 # endif
 
-/*azerty linux*/
 # ifdef __linux
 #  define KEY_FORWARD 122
 #  define KEY_BACKWARD 115
@@ -44,7 +43,6 @@
 #  define KEY_ESCAPE 65307
 # endif
 
-/*qwerty MAC*/
 # ifdef __APPLE__
 #  define KEY_FORWARD 13
 #  define KEY_BACKWARD 1
@@ -55,18 +53,17 @@
 #  define KEY_ESCAPE 65307
 # endif
 
-typedef struct	s_xtur {
-//	char	*path;
-	void	*img;
-	char	*add;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		width;
-	int		height;
-}				t_xtur;
+typedef struct		s_xtur {
+	void			*img;
+	char			*add;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+	int				width;
+	int				height;
+}					t_xtur;
 
-typedef struct	s_all
+typedef struct		s_all
 {
 	t_xtur			text[10];
 	int				save;
@@ -103,122 +100,105 @@ typedef struct	s_all
 	int				drawxstart;
 	int				drawxend;
 	double			invdet;
+	void			*mlx;
+	void			*img;
+	void			*win;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+	int				forward;
+	int				backward;
+	int				left;
+	int				right;
+	int				turn_left;
+	int				turn_right;
+	int				escape;
+	double			rdirx;
+	double			rdiry;
+	double			xc;
+	int				xmap;
+	int				ymap;
+	double			sidedistx;
+	double			sidedisty;
+	double			deltadistx;
+	double			deltadisty;
+	double			walldist;
+	double			wallx;
+	int				xtex;
+	int				ytex;
+	int				side;
+	int				stepx;
+	int				stepy;
+	int				hit;
+	int				vertl;
+	double			verstep;
+	double			texpos;
+	int				botline;
+	int				topline;
+	int				col;
+}					t_all;
 
-	/* Puis, le reste */
+void				ft_printall(t_all all);
+int					main (int argc, char **argv);
 
-    void		*mlx;
-	void        *img;
-	void		*win;
-    char        *addr;
-    int         bits_per_pixel;
-    int         line_length;
-    int         endian;
-	int			forward;
-	int			backward;
-	int			left;
-	int			right;
-	int			turn_left;
-	int 		turn_right;
-	int			escape;
-	double		rdirx;
-	double		rdiry;
-	double		xc;
-	int			xmap;
-	int			ymap;
-	double		sidedistx;
-	double		sidedisty;
-	double		deltadistx;
-	double		deltadisty;
-	double		walldist;
-	double		wallx;
-	int			xtex;
-	int			ytex;
-	int			side;
-	int			stepx;
-	int			stepy;
-	int			hit;
-	int			vertl;
-	double		verstep;
-	double		texpos;
-	int			botline;
-	int			topline;
-	int			col;
-}				t_all;
+int					get_next_line(int fd, char **line);
+int					ft_strlen(char *str);
+char				*ft_joinofgnl(char *s1, char *s2);
+int					ft_hasnewline(char *str);
+char				*ft_majtmp(char *tmp);
+char				*ft_newline(char *tmp);
 
-/*cub3d*/
-void	ft_printall(t_all all);
-int		main (int argc, char **argv);
+int					ft_parserdata(t_all *all, int fd, char *line);
+void				ft_ispath(t_all *all, char **words);
 
-/* gnl & gn_utils*/
-int		get_next_line(int fd, char **line);
-int		ft_strlen(char *str);
-char	*ft_joinofgnl(char *s1, char *s2);
-int		ft_hasnewline(char *str);
-char	*ft_majtmp(char *tmp);
-char	*ft_newline(char *tmp);
+void				ft_firstmapline (t_all *all, int fd, char *line);
+int					ft_validmap(t_all *all);
+void				ft_spacepad(t_all *all);
+int					ft_parsermap(t_all *all, int fd, char *line);
+void				ft_mempos(t_all *all, int i, int j);
+int					ft_testpos(t_all *all, int i, int j);
+void				ft_spritestock(t_all *all);
 
-/*parserdata*/
-int		ft_parserdata(t_all *all, int fd, char *line);
-void	ft_ispath(t_all *all, char **words);
+char				**ft_split(char *str, char *charset);
+int					is_insep(char c, char *sep);
 
-/*parsermap*/
-void	ft_firstmapline (t_all *all, int fd, char *line);
-int		ft_validmap(t_all *all);
-void	ft_spacepad(t_all *all);
-int		ft_parsermap(t_all *all, int fd, char *line);
-void	ft_mempos(t_all *all, int i, int j);
-int		ft_testpos(t_all *all, int i, int j);
-void	ft_spritestock(t_all *all);
+void				ft_initall(t_all *all);
+void				ft_initall2(t_all *all);
+int					ft_atoi(char *str);
+char				*ft_strdup(char *s);
+void				ft_freesplit(char **str);
+void				ft_finalcheck(t_all *all);
+double				f_abs(double d);
 
-/*split*/
-char	**ft_split(char *str, char *charset);
-int		is_insep(char c, char *sep);
+void				ft_initext(t_all *all);
+int					ft_testview(t_all *all);
+int					raycasting(t_all *all);
+int					raycasting2(t_all *all);
+void				my_mlx_pixel_put(t_all *all, int x, int y, int color);
+void				put_player(t_all *all);
+void				put_mapsquare(t_all *all, int i, int j, int color);
+void				my_minimap(t_all *all);
 
-/*randomutils*/
-void	ft_initall(t_all *all);
-void	ft_initall2(t_all *all);
-int		ft_atoi(char *str);
-char	*ft_strdup(char *s);
-void	ft_freesplit(char **str);
-void	ft_finalcheck(t_all *all);
-double	f_abs(double d);
+void				ft_step(t_all *all);
+void				ft_hit(t_all *all);
+void				ft_colplot(t_all *all);
+void				ft_colplot2(t_all *all);
+void				ft_sprite(t_all *all);
 
-/*view*/
-void	ft_initext(t_all *all);
+int					ft_key_hook(int n, t_all *all);
+int					ft_key_unhook(int n, t_all *all);
 
-/*view2*/
-int		ft_testview(t_all *all);
-int		raycasting(t_all *all);
-void	my_mlx_pixel_put(t_all *all, int x, int y, int color);
-void	put_player(t_all *all);
-void	put_mapsquare(t_all *all, int i, int j, int color);
-void	my_minimap(t_all *all);
+void				ft_forward(t_all *all);
+void				ft_side(t_all *all);
+void				ft_back(t_all *all);
+void				ft_turn(t_all *all);
+void				ft_mvt(t_all *all);
 
+int					ft_save(t_all *all, int argc, char **argv);
+void				ft_printframe(t_all *all);
 
-void	ft_step(t_all *all);
-void	ft_hit(t_all *all);
-void	ft_colplot(t_all *all);
-void	ft_colplot2(t_all *all);
-
-/*sprite*/
-void	ft_sprite(t_all *all);
-
-/*hook*/
-int     ft_key_hook(int n, t_all *all);
-int     ft_key_unhook(int n, t_all *all);
-
-/*mvmts*/
-void    ft_forward(t_all *all);
-void    ft_side(t_all *all);
-void    ft_back(t_all *all);
-void    ft_turn(t_all *all);
-void    ft_mvt(t_all *all);
-
-/*Save*/
-int		ft_save(t_all *all, int argc, char **argv);
-void	ft_printframe(t_all *all);
-
-/*Clean exit*/
-int		ft_cleanstruct(t_all *all);
+int					ft_cleanstruct(t_all *all);
+void				ft_cleangnl(int fd, char *line);
 
 #endif
