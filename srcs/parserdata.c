@@ -49,7 +49,7 @@ char	*ft_pathfill(char **words, t_all *all)
 	int		fd;
 	char	*res;
 
-	printf("\nwe fill a path\n");
+	printf("We fill a texture path: %s\n", words[0]);
 	res = ft_strdup(words[1]);
 	fd = open(res, O_RDONLY);
 	if (fd < 0 || words[2] != 0)
