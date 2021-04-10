@@ -92,8 +92,8 @@ int		ft_parsermap(t_all *all, int fd, char *line)
 		all->mapheight += 1;
 	}
 	all->map[n] = 0;
-	ft_validmap(all);
 	ft_spacepad(all);
+	ft_validmap(all);
 	ft_spritestock(all);
 	return (all->isok == 325);
 }

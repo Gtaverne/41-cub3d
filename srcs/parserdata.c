@@ -28,11 +28,13 @@ void	ft_resfill(t_all *all, char **words)
 
 int		ft_rgb(char **words, t_all *all)
 {
-	int	i;
+	long int	i;
 
 	i = ft_atoi(words[1]) * 65536 + ft_atoi(words[2]) * 256 \
 	+ ft_atoi(words[3]);
-	if (i >= 0 && i < 16777216 && words[4] == 0)
+	if (i >= 0 && i < 16777216 && words[4] == 0 &&
+	ft_atoi(words[1]) < 256 && ft_atoi(words[2]) < 256 &&
+	ft_atoi(words[3]) < 256)
 		all->isok += 10;
 	else
 	{

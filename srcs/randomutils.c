@@ -12,7 +12,7 @@
 
 #include "../includes/cub3d.h"
 
-void	ft_initall(t_all *all)
+void		ft_initall(t_all *all)
 {
 	all->isok = 0;
 	all->x_screen = -1;
@@ -41,14 +41,14 @@ void	ft_initall(t_all *all)
 	ft_initall2(all);
 }
 
-void	ft_initall2(t_all *all)
+void		ft_initall2(t_all *all)
 {
 	all->escape = 0;
 	all->save = 0;
 	all->map[0] = NULL;
 }
 
-int		ft_atoi(char *nptr)
+long int	ft_atoi(char *nptr)
 {
 	long long int		i;
 	long long int		r;
@@ -77,7 +77,7 @@ int		ft_atoi(char *nptr)
 	return (s * r);
 }
 
-char	*ft_strdup(char *s)
+char		*ft_strdup(char *s)
 {
 	char	*res;
 	int		i;
@@ -96,7 +96,7 @@ char	*ft_strdup(char *s)
 	return (res);
 }
 
-void	ft_freesplit(char **str)
+void		ft_freesplit(char **str)
 {
 	int	i;
 

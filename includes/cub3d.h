@@ -166,7 +166,7 @@ int					is_insep(char c, char *sep);
 
 void				ft_initall(t_all *all);
 void				ft_initall2(t_all *all);
-int					ft_atoi(char *str);
+long int			ft_atoi(char *str);
 char				*ft_strdup(char *s);
 void				ft_freesplit(char **str);
 void				ft_finalcheck(t_all *all);
