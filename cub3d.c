@@ -40,7 +40,8 @@ int		main(int argc, char **argv)
 	char	*line;
 
 	ft_initall(&all);
-	if (ft_save(&all, argc, argv) == 0)
+	if (ft_save(&all, argc, argv) == 0 || ft_checkpath(argv, &all
+	, ".cub"))
 		return (0);
 	line = NULL;
 	fd = open(argv[1], O_RDONLY);

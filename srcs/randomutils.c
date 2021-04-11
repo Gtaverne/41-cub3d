@@ -52,29 +52,27 @@ long int	ft_atoi(char *nptr)
 {
 	long long int		i;
 	long long int		r;
-	long long int		s;
 
 	i = 0;
 	r = 0;
-	s = 1;
-	while (nptr[i] == ' ' || (nptr[i] >= '\t' && nptr[i] <= '\r'))
-		i++;
 	if (nptr[i] == '-')
 	{
-		s = -1;
-		i++;
+		printf("Negative number in res or rgb, value set to 0\n");
+		return (0);
 	}
-	else if (nptr[i] == '+')
-		i++;
 	while (nptr[i] != '\0')
 	{
 		if (nptr[i] >= '0' && nptr[i] <= '9')
 			r = r * 10 + nptr[i] - '0';
-		else
-			break ;
+		else if (nptr[i] >= 32 && nptr[i] <= 126)
+		{
+			printf("Non numerical character in res or rgb \
+value set to 0\n");
+			return (0);
+		}
 		i++;
 	}
-	return (s * r);
+	return (r);
 }
 
 char		*ft_strdup(char *s)

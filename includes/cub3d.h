@@ -148,6 +148,7 @@ char				*ft_joinofgnl(char *s1, char *s2);
 int					ft_hasnewline(char *str);
 char				*ft_majtmp(char *tmp);
 char				*ft_newline(char *tmp);
+int					ft_checkpath(char **words, t_all *all, char *end);
 
 int					ft_parserdata(t_all *all, int fd, char *line);
 void				ft_ispath(t_all *all, char **words);
@@ -169,7 +170,6 @@ void				ft_initall2(t_all *all);
 long int			ft_atoi(char *str);
 char				*ft_strdup(char *s);
 void				ft_freesplit(char **str);
-void				ft_finalcheck(t_all *all);
 double				f_abs(double d);
 
 void				ft_initext(t_all *all);

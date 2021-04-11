@@ -43,6 +43,9 @@ void	put_player(t_all *all)
 {
 	int	i;
 
+	if (all->mapheight * (MINIMAP + 3) > all->y_screen ||
+	all->mapwdth * (MINIMAP + 3) > all->x_screen)
+		return ;
 	i = 0;
 	my_mlx_pixel_put(all, (int)(MINIMAP * (all->xpos + 1)),
 	(int)(MINIMAP * (all->ypos + 1)), PLYR);

@@ -19,7 +19,8 @@ void	ft_cleanmlx(t_all *all)
 	i = -1;
 	mlx_destroy_image(all->mlx, all->img);
 	while (++i < 5)
-		mlx_destroy_image(all->mlx, all->text[i].img);
+		if (all->text[i].img != 0)
+			mlx_destroy_image(all->mlx, all->text[i].img);
 	if (all->save == 0)
 		mlx_destroy_window(all->mlx, all->win);
 	mlx_destroy_display(all->mlx);
@@ -55,7 +56,7 @@ int		ft_cleanstruct(t_all *all)
 	}
 	if (all->escape == 1)
 		ft_cleanmlx(all);
-	printf("Goodbye\n");
+	printf("We clean and we close\n");
 	exit(0);
 	return (0);
 }

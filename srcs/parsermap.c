@@ -80,7 +80,7 @@ int		ft_parsermap(t_all *all, int fd, char *line)
 	ft_firstmapline(all, fd, line);
 	while (get_next_line(fd, &all->map[n]) >= 0 && n < 2046)
 	{
-		if (all->map[n][0] == 0 || all->map[n][0] == '\n')
+		if (all->map[n][0] == 0 || all->map[n][0] == '\n' || n > 2000)
 		{
 			free(all->map[n]);
 			ft_cleangnl(fd, line);

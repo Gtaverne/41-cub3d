@@ -7,7 +7,7 @@ NO ./textures/no.xpm
 SO ./textures/so.xpm
 EA ./textures/ea.xpm
 
-S ./textures/tonneau.xpm
+S ./textures/5.xpm
 F 250, 210, 50
 C 180 , 180, 255
 

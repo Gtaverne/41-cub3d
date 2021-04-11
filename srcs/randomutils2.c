@@ -12,20 +12,25 @@
 
 #include "../includes/cub3d.h"
 
-void	ft_finalcheck(t_all *all)
-{
-	if (all->no_path[0] && all->ea_path[0] &&
-	all->so_path[0] && all->we_path[0] && all->s_path[0]
-	&& all->floor_rgb != -1 && all->ceil_rgb != -1 && all->xpos != -1
-	&& all->ypos != -1 && f_abs(all->xdir) + f_abs(all->ydir) == 1
-	&& all->x_screen > 5 && all->y_screen > 5)
-		all->isok += 1000;
-}
-
 double	f_abs(double d)
 {
 	if (d >= 0)
 		return (d);
 	else
 		return (-d);
+}
+
+int		ft_checkpath(char **words, t_all *all, char *end)
+{
+	int	i;
+
+	i = ft_strlen(words[1]);
+	if (words[1][i - 1] != end[3] || words[1][i - 2] != end[2] ||
+	words[1][i - 3] != end[1] || words[1][i - 4] != end[0])
+	{
+		printf("%s is not a valid %s file\n", words[1], end);
+		all->isok += 1000;
+		return (1);
+	}
+	return (0);
 }

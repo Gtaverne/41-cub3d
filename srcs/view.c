@@ -26,13 +26,18 @@ void	ft_initext(t_all *all)
 	&all->text[3].width, &all->text[3].height);
 	all->text[4].img = mlx_xpm_file_to_image(all->mlx, all->s_path,
 	&all->text[4].width, &all->text[4].height);
-	i = 0;
-	while (i < 5)
+	i = -1;
+	while (++i < 5)
 	{
+		if (!all->text[i].img)
+		{
+			printf("Error\nA texture could not be opened\n");
+			all->escape = 1;
+			ft_cleanstruct(all);
+		}
 		all->text[i].add = mlx_get_data_addr(all->text[i].img,
 		&all->text[i].bits_per_pixel, &all->text[i].line_length,
 		&all->text[i].endian);
-		i++;
 	}
 }
 

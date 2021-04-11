@@ -16,7 +16,7 @@ void	ft_resfill(t_all *all, char **words)
 {
 	all->x_screen = ft_atoi(words[1]);
 	all->y_screen = ft_atoi(words[2]);
-	if (all->x_screen < 5 || all->y_screen < 5)
+	if (all->x_screen < 5 || all->y_screen < 5 || words[3] != 0)
 	{
 		printf("Resolution false or too low, x = %d, y = %d \n"\
 		, all->x_screen, all->y_screen);
@@ -30,15 +30,21 @@ int		ft_rgb(char **words, t_all *all)
 {
 	long int	i;
 
+	if (words[3] == 0 || words[4] != 0)
+	{
+		printf("Error\n%s has invalid rgb code\n", words[0]);
+		all->isok += 1000;
+		return (0);
+	}
 	i = ft_atoi(words[1]) * 65536 + ft_atoi(words[2]) * 256 \
 	+ ft_atoi(words[3]);
-	if (i >= 0 && i < 16777216 && words[4] == 0 &&
+	if (i >= 0 && i < 16777216 && words[3] != 0 &&
 	ft_atoi(words[1]) < 256 && ft_atoi(words[2]) < 256 &&
 	ft_atoi(words[3]) < 256)
 		all->isok += 10;
 	else
 	{
-		printf("Error\nWrong colour code\n");
+		printf("Error\n%s has invalid rgb code\n", words[0]);
 		all->isok += 1000;
 	}
 	return (i);
@@ -50,9 +56,13 @@ char	*ft_pathfill(char **words, t_all *all)
 	char	*res;
 
 	printf("We fill a texture path: %s\n", words[0]);
-	res = ft_strdup(words[1]);
+	if (words[2] != 0 || words[1] == 0)
+		res = ft_strdup(words[0]);
+	else
+		res = ft_strdup(words[1]);
 	fd = open(res, O_RDONLY);
-	if (fd < 0 || words[2] != 0)
+	if (fd < 0 || words[2] != 0 || words[1] == 0 ||
+	ft_checkpath(words, all, ".xpm"))
 	{
 		all->isok = all->isok + 1000;
 		printf("Error\nWrong path : %s\n", res);
@@ -106,8 +116,6 @@ int		ft_parserdata(t_all *all, int fd, char *line)
 			all->ceil_rgb = ft_rgb(words, all);
 		else
 			ft_ispath(all, words);
-		if (all->isok >= 1000)
-			printf("Check if data is valid\n");
 		ft_freesplit(words);
 	}
 	free(line);
