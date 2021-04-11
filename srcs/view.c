@@ -55,7 +55,7 @@ int		ft_testview(t_all *all)
 	if (all->save == 0)
 	{
 		all->win = mlx_new_window(all->mlx, all->x_screen,
-		all->y_screen, "On va rester SFW");
+		all->y_screen, "Welcome to the party");
 		mlx_loop_hook(all->mlx, raycasting, all);
 		mlx_hook(all->win, 2, 1L << 0, ft_key_hook, all);
 		mlx_hook(all->win, 33, 1L << 5, ft_cleanstruct, all);

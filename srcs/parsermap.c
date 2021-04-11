@@ -43,7 +43,7 @@ int		ft_validmap(t_all *all)
 		{
 			if (is_insep(all->map[i][j], "NSWE"))
 				ft_mempos(all, i, j);
-			if (all->map[i][j] == '0')
+			if (is_insep(all->map[i][j], "02"))
 			{
 				if (ft_testpos(all, i, j) == 0)
 					return (0);

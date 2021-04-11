@@ -44,7 +44,8 @@ int		ft_testpos(t_all *all, int i, int j)
 {
 	if (i == 0 || j == 0 || j == all->mapwdth || !(all->map[i + 1]))
 	{
-		printf("Error\n0 on a map edge, lin: %d col: %d\n", i, j);
+		printf("Error\nWrong character on a map edge\n\
+		lin: %d col: %d\n", i, j);
 		all->isok += 1000;
 		return (0);
 	}
@@ -53,7 +54,8 @@ int		ft_testpos(t_all *all, int i, int j)
 	all->map[i][j + 1] == ' ' || all->map[i + 1][j - 1] == ' ' ||\
 	all->map[i + 1][j] == ' ' || all->map[i + 1][j + 1] == ' ')
 	{
-		printf("Error\n0 on a map edge, lin: %d col: %d\n", i, j);
+		printf("Error\nWrong character on a map edge\n\
+		lin: %d col: %d\n", i, j);
 		all->isok += 1000;
 		return (0);
 	}
