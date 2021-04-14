@@ -57,7 +57,8 @@ long int	ft_atoi(char *nptr)
 	r = 0;
 	if (nptr[i] == '-')
 	{
-		printf("Negative number in res or rgb, value set to 0\n");
+		printf("Warning\n\
+Negative number in res or rgb, value set to 0\n");
 		return (0);
 	}
 	while (nptr[i] != '\0')
@@ -66,7 +67,7 @@ long int	ft_atoi(char *nptr)
 			r = r * 10 + nptr[i] - '0';
 		else if (nptr[i] >= 32 && nptr[i] <= 126)
 		{
-			printf("Non numerical character in res or rgb \
+			printf("Warning\nNon numerical character in res or rgb \
 value set to 0\n");
 			return (0);
 		}
