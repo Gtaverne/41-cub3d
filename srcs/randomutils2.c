@@ -35,6 +35,12 @@ int		ft_checkpath(char **words, t_all *all, char *end)
 	return (0);
 }
 
+void	ft_rgberror(t_all *all, char *str)
+{
+	printf("Reformat %s\n", str);
+	all->isok += 1000;
+}
+
 void	ft_countchar(char *str, char c, t_all *all)
 {
 	int	i;
@@ -61,10 +67,7 @@ void	ft_countchar(char *str, char c, t_all *all)
 		j = 1;
 	k += j;
 	if (k != 5)
-	{
-		printf("Reformat %s\n", str - 2);
-		all->isok += 1000;
-	}
+		ft_rgberror(all, str - 2);
 }
 
 char	*ft_strspl(char *line)

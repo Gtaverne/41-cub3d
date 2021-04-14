@@ -1,4 +1,3 @@
-##this makefile is not MLX ready
 NAME	= cub3D
 
 OS		= ${shell uname -s}
@@ -14,8 +13,6 @@ CFLAGS	=	-Wall -Wextra -Werror -g #-fsanitize=address
 MLX_DIR	=	mlx
 MLX_LNX	=	mlx-linux
 MLX		=	libmlx.dylib
-BONUS	=	-D BONUS=1
-
 
 ifeq ($(OS), Linux)
 all: $(NAME)
@@ -38,33 +35,6 @@ clean:
 	rm -f $(OBJ)
 	make clean -C $(MLX_LNX)
 endif
-
-
-
-ifeq ($(OS), Darwin)
-all: $(NAME)
-
-$(NAME): mlx $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L $(MLX_DIR) -l $(MLX_DIR)
-	install_name_tool -change $(MLX) @loader_path/$(MLX_DIR)/$(MLX) $(NAME)
-
-mlx:
-	make -C $(MLX_DIR) 
-
-$(OBJDIR)/%.o: %.c $(MLX_DIR)/$(MLX) $(HEADER)
-	$(CC) $(CFLAGS) -I $(MLX_DIR) -c $< -o $@
-
-bonus: CFLAGS	=	-Wall -Wextra -Werror $(BONUS)
-
-bonus: mlx $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L $(MLX_DIR) -l $(MLX_DIR)
-	install_name_tool -change $(MLX) @loader_path/$(MLX_DIR)/$(MLX) $(NAME)
-
-clean:
-	rm -f $(OBJ)
-	make clean -C $(MLX_DIR)
-endif
-
 
 fclean: clean
 	rm -f $(NAME)

@@ -56,6 +56,7 @@ void	ft_checkres(t_all *all)
 int		ft_testview(t_all *all)
 {
 	all->mlx = mlx_init();
+	all->escape = 1;
 	ft_checkres(all);
 	if (all->save == 0)
 	{
