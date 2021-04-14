@@ -164,7 +164,7 @@ void				ft_invalidcharacter(t_all *all, int i, int j);
 
 char				**ft_split(char *str, char *charset, t_all *all);
 int					is_insep(char c, char *sep);
-void					ft_countchar(char *str, char c, t_all *all);
+void				ft_countchar(char *str, char c, t_all *all);
 
 void				ft_initall(t_all *all);
 void				ft_initall2(t_all *all);
@@ -173,7 +173,6 @@ char				*ft_strdup(char *s);
 void				ft_freesplit(char **str);
 double				f_abs(double d);
 char				*ft_strspl(char *line);
-
 
 void				ft_initext(t_all *all);
 int					ft_testview(t_all *all);

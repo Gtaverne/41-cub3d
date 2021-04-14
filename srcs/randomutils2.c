@@ -37,7 +37,7 @@ int		ft_checkpath(char **words, t_all *all, char *end)
 
 void	ft_rgberror(t_all *all, char *str)
 {
-	printf("Reformat %s\n", str);
+	printf("Reformat %s\nExample : C 100,0,50\n", str);
 	all->isok += 1000;
 }
 
