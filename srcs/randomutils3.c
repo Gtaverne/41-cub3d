@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   randomutils2.c                                     :+:      :+:    :+:   */
+/*   randomutils3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -33,47 +33,4 @@ int		ft_checkpath(char **words, t_all *all, char *end)
 		return (1);
 	}
 	return (0);
-}
-
-void	ft_countchar(char *str, char c, t_all *all)
-{
-	int	i;
-	int	k;
-	int j;
-
-	i = -1;
-	k = 0;
-	j = 0;
-	str = str + 2;
-	while (str[++i] && is_insep(str[i], "0123456789"))
-		j = 1;
-	k += j;
-	j = 0;
-	if (str[i] == c)
-		k++;
-	while (str[++i] && is_insep(str[i], "0123456789"))
-		j = 1;
-	k += j;
-	j = 0;
-	if (str[i] == c)
-		k++;
-	while (str[++i] && is_insep(str[i], "0123456789"))
-		j = 1;
-	k += j;
-	if (k != 5)
-	{
-		printf("Reformat %s\n", str - 2);
-		all->isok += 1000;
-	}
-}
-
-char	*ft_strspl(char *line)
-{
-	if ((line[0] == 'F' || line[0] == 'C') && line[1] == ' ')
-		return (" ,");
-	else if (line[0] == 'R' || line[0] == 'S' || line[0] == 'W'
-	|| line[0] == 'E' || line[0] == 'N')
-		return (" ");
-	else
-		return (" \n");
 }

@@ -71,7 +71,7 @@ char	*ft_wrdcpy(char *src, int wlen)
 	return (tmp);
 }
 
-char	**ft_split(char *str, char *charset)
+char	**ft_split(char *str, char *charset, t_all *all)
 {
 	int		i;
 	int		k;
@@ -94,5 +94,7 @@ char	**ft_split(char *str, char *charset)
 			i++;
 	}
 	tab[k] = 0;
+	if (charset[1] == ',')
+		ft_countchar(str, ',', all);
 	return (tab);
 }

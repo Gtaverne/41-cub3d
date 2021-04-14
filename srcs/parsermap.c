@@ -14,6 +14,7 @@
 
 void	ft_firstmapline(t_all *all, int fd, char *line)
 {
+	printf("Sortie de data, %s\n", line);
 	while (get_next_line(fd, &line) >= 0 && line)
 	{
 		if (line[0] != 0)

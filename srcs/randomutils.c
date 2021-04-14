@@ -48,24 +48,25 @@ void		ft_initall2(t_all *all)
 	all->map[0] = NULL;
 }
 
-long int	ft_atoi(char *nptr)
+long int	ft_atoi(char *nptr, t_all *all)
 {
 	long long int		i;
 	long long int		r;
 
 	i = 0;
 	r = 0;
-	if (nptr[i] == '-')
+	while (nptr[i] == ' ')
+		i++;
+	if (nptr[i] < '0' || nptr[i] > '9')
 	{
-		printf("Warning\n\
-Negative number in res or rgb, value set to 0\n");
+		all->isok += 1000;
 		return (0);
 	}
 	while (nptr[i] != '\0')
 	{
 		if (nptr[i] >= '0' && nptr[i] <= '9')
 			r = r * 10 + nptr[i] - '0';
-		else if (nptr[i] >= 32 && nptr[i] <= 126)
+		else if (nptr[i] > '9' || nptr[i] < '0')
 		{
 			printf("Warning\nNon numerical character in res or rgb \
 value set to 0\n");

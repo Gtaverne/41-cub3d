@@ -14,8 +14,14 @@
 
 void	ft_resfill(t_all *all, char **words)
 {
-	all->x_screen = ft_atoi(words[1]);
-	all->y_screen = ft_atoi(words[2]);
+	if (all->x_screen != -1 || all->y_screen != -1)
+	{
+		printf("Error\nMultiple resolution input\n");
+		all->isok += 1000;
+		return ;
+	}
+	all->x_screen = ft_atoi(words[1], all);
+	all->y_screen = ft_atoi(words[2], all);
 	if (all->x_screen < 5 || all->y_screen < 5 || words[3] != 0)
 	{
 		printf("Resolution false or too low, x = %d, y = %d \n"\
@@ -26,7 +32,7 @@ void	ft_resfill(t_all *all, char **words)
 		all->isok += 100;
 }
 
-int		ft_rgb(char **words, t_all *all)
+void	ft_rgb(char **words, t_all *all, int c)
 {
 	long int	i;
 
@@ -34,20 +40,24 @@ int		ft_rgb(char **words, t_all *all)
 	{
 		printf("Error\n%s has invalid rgb code\n", words[0]);
 		all->isok += 1000;
-		return (0);
+		return ;
 	}
-	i = ft_atoi(words[1]) * 65536 + ft_atoi(words[2]) * 256 \
-	+ ft_atoi(words[3]);
-	if (i >= 0 && i < 16777216 && words[3] != 0 &&
-	ft_atoi(words[1]) < 256 && ft_atoi(words[2]) < 256 &&
-	ft_atoi(words[3]) < 256)
+	i = ft_atoi(words[1], all) * 65536 + ft_atoi(words[2], all) *
+	256 + ft_atoi(words[3], all);
+	if (i >= 0 && i < 16777216 && ft_atoi(words[1], all) < 256 &&
+	ft_atoi(words[2], all) < 256 && ft_atoi(words[3], all) < 256)
 		all->isok += 10;
 	else
-	{
-		printf("Error\n%s has invalid rgb code\n", words[0]);
 		all->isok += 1000;
+	if (c == 1 && all->ceil_rgb == -1)
+		all->ceil_rgb = i;
+	else if (c == 0 && all->floor_rgb == -1)
+		all->floor_rgb = i;
+	else
+	{
+		all->isok += 1000;
+		printf("Error\n%s has invalid rgb code\n", words[0]);
 	}
-	return (i);
 }
 
 char	*ft_pathfill(char **words, t_all *all)
@@ -104,20 +114,20 @@ int		ft_parserdata(t_all *all, int fd, char *line)
 
 	while (get_next_line(fd, &line) == 1 && all->isok < 125)
 	{
-		words = ft_split(line, " ,");
+		words = ft_split(line, ft_strspl(line), all);
 		free(line);
 		if (!words[0])
 			;
 		else if (words[0][0] == 'R' && words[0][1] == 0)
 			ft_resfill(all, words);
-		else if (words[0][0] == 'F' && words[0][1] == 0)
-			all->floor_rgb = ft_rgb(words, all);
-		else if (words[0][0] == 'C' && words[0][1] == 0)
-			all->ceil_rgb = ft_rgb(words, all);
+		else if ((words[0][0] == 'C' || words[0][0] == 'F') &&
+		words[0][1] == 0)
+			ft_rgb(words, all, words[0][0] == 'C');
 		else
 			ft_ispath(all, words);
 		ft_freesplit(words);
 	}
+	all->isok += 1000 * ft_strlen(line);
 	free(line);
 	if (all->isok == 125)
 		return (1);

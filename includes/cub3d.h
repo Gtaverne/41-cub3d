@@ -70,8 +70,8 @@ typedef struct		s_all
 	double			spritab[500][3];
 	double			bufferdist[10000];
 	int				isok;
-	unsigned short	x_screen;
-	unsigned short	y_screen;
+	int				x_screen;
+	int				y_screen;
 	char			*no_path;
 	char			*ea_path;
 	char			*so_path;
@@ -162,15 +162,18 @@ int					ft_testpos(t_all *all, int i, int j);
 void				ft_spritestock(t_all *all);
 void				ft_invalidcharacter(t_all *all, int i, int j);
 
-char				**ft_split(char *str, char *charset);
+char				**ft_split(char *str, char *charset, t_all *all);
 int					is_insep(char c, char *sep);
+void					ft_countchar(char *str, char c, t_all *all);
 
 void				ft_initall(t_all *all);
 void				ft_initall2(t_all *all);
-long int			ft_atoi(char *str);
+long int			ft_atoi(char *str, t_all *all);
 char				*ft_strdup(char *s);
 void				ft_freesplit(char **str);
 double				f_abs(double d);
+char				*ft_strspl(char *line);
+
 
 void				ft_initext(t_all *all);
 int					ft_testview(t_all *all);
