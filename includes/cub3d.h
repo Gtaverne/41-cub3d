@@ -43,16 +43,6 @@
 #  define KEY_ESCAPE 65307
 # endif
 
-# ifdef __APPLE__
-#  define KEY_FORWARD 13
-#  define KEY_BACKWARD 1
-#  define KEY_LEFT 0
-#  define KEY_RIGHT 2
-#  define KEY_TURN_LEFT 123
-#  define KEY_TURN_RIGHT 124
-#  define KEY_ESCAPE 65307
-# endif
-
 typedef struct		s_xtur {
 	void			*img;
 	char			*add;
