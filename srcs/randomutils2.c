@@ -50,8 +50,7 @@ void	ft_countchar(char *str, char c, t_all *all)
 	i = -1;
 	k = 0;
 	j = 0;
-	str = str + 2;
-	while (str[++i] && is_insep(str[i], "0123456789 "))
+	while (str[++i] && is_insep(str[i], "FC0123456789 "))
 		j = 1;
 	k += j;
 	j = 0;
@@ -72,11 +71,13 @@ void	ft_countchar(char *str, char c, t_all *all)
 
 char	*ft_strspl(char *line)
 {
-	if ((line[0] == 'F' || line[0] == 'C') && line[1] == ' ')
+	int	i;
+
+	i = 0;
+	while (line[i] && line[i] == ' ')
+		i++;
+	if ((line[i] == 'F' || line[i] == 'C') && line[i + 1] == ' ')
 		return (" ,");
-	else if (line[0] == 'R' || line[0] == 'S' || line[0] == 'W'
-	|| line[0] == 'E' || line[0] == 'N')
-		return (" ");
 	else
-		return (" \n");
+		return (" ");
 }
