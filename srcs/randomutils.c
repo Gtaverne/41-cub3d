@@ -66,7 +66,7 @@ long int	ft_atoi(char *nptr, t_all *all)
 	{
 		if (is_insep(nptr[i], "0123456789"))
 			r = r * 10 + nptr[i] - '0';
-		else if (nptr[i] > '9' || nptr[i] < '0')
+		else
 		{
 			printf("Error\nNon numerical character in data parsing\n");
 			all->isok += 1000;

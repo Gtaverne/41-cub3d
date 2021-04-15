@@ -51,22 +51,22 @@ void	ft_countchar(char *str, char c, t_all *all)
 	k = 0;
 	j = 0;
 	str = str + 2;
-	while (str[++i] && is_insep(str[i], "0123456789"))
+	while (str[++i] && is_insep(str[i], "0123456789 "))
 		j = 1;
 	k += j;
 	j = 0;
 	if (str[i] == c)
 		k++;
-	while (str[++i] && is_insep(str[i], "0123456789"))
+	while (str[++i] && is_insep(str[i], "0123456789 "))
 		j = 1;
 	k += j;
 	j = 0;
 	if (str[i] == c)
 		k++;
-	while (str[++i] && is_insep(str[i], "0123456789"))
+	while (str[++i] && is_insep(str[i], "0123456789 "))
 		j = 1;
 	k += j;
-	if (k != 5)
+	if (k != 5 || str[i] != 0)
 		ft_rgberror(all, str - 2);
 }
 
